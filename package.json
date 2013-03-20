@@ -1,12 +1,11 @@
 {
-  "name": "prime-factors-javascript",
+  "name": "pic-bois",
   "version": "0.0.1",
   "dependencies": {
 	
   },
   "devDependencies": {
-	"zombie" : "1.4.x",
-	"jasmine-node" : "1.4.x"
+	"zombie" : "1.4.x"
   },
 
   "engines": {
