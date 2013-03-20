@@ -5,7 +5,8 @@
 	
   },
   "devDependencies": {
-	"zombie" : "1.4.x"
+	"zombie" : "1.4.x",
+	"request": "2.14.x"
   },
 
   "engines": {
