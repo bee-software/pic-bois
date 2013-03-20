@@ -1,0 +1,15 @@
+{
+  "name": "prime-factors-javascript",
+  "version": "0.0.1",
+  "dependencies": {
+	
+  },
+  "devDependencies": {
+	"zombie" : "1.4.x"
+  },
+
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
+  }
+}
