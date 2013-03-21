@@ -30,14 +30,21 @@ describe("public/goals.new.html", function() {
 		
 		it("field to enter goal is ready", function(done) {
 			browser.visit(page).then(function () {
-		      	expect(browser.query("#scoredBy")).toBeDefined();
+		      	expect(browser.query("input#scoredBy")).toBeDefined();
 				done();
 			});
 		});
 		
 		it("field to enter assistant is ready", function(done) {
 			browser.visit(page).then(function () {
-		      	expect(browser.query("#assistedBy")).toBeDefined();
+		      	expect(browser.query("input#assistedBy")).toBeDefined();
+				done();
+			});
+		});
+		
+		it("button to submit form is ready", function(done) {
+			browser.visit(page).then(function () {
+		      	expect(browser.text("button#submit")).toEqual("save!");
 				done();
 			});
 		});
