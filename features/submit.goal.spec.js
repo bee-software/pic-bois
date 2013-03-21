@@ -19,7 +19,7 @@ describe("submit goal", function() {
 		browser.visit("http://localhost:5000/goals/new", function () {
 			browser.fill("#scoredBy", "23");
 			browser.fill("#assistedBy", "10");
-			browser.click("#submit", function() {
+			browser.pressButton("#submit", function() {
 				expect(browser.text("#message")).toEqual("saved: goal scored by player 23 and assisted by player 10");
 				done();
 			});
