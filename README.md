@@ -9,3 +9,6 @@
 # To run the feature tests
 - console: ./node_modules/jasmine-node/bin/jasmine-node features --captureExceptions
 - webstorm: create a node.js configuration with the proper parameters
+
+#to run the spec tests
+- console: ./node_modules/jasmine-node/bin/jasmine-node spec --captureExceptions
