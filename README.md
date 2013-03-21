@@ -6,6 +6,6 @@
 # Setup
 - run npm install
 
-# To run the feature tests:
+# To run the feature tests
 - console: ./node_modules/jasmine-node/bin/jasmine-node features --captureExceptions
 - webstorm: create a node.js configuration with the proper parameters
