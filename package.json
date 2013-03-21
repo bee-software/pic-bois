@@ -6,6 +6,7 @@
   },
   "devDependencies": {
 	"zombie" : "1.4.x",
+    "jasmine-node" : "1.4.x",
 	"request": "2.14.x"
   },
 
