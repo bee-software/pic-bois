@@ -1,20 +1,21 @@
-# Requirements
-
+#requirements
 - Install node: http://nodejs.org/
 - Install make: on mac http://stackoverflow.com/questions/10265742/how-to-install-make-and-gcc-on-a-mac
 
-# Setup
-- run npm install
+#setup
+- npm install
 
-# To run the feature tests
-- console: ./node_modules/jasmine-node/bin/jasmine-node features --captureExceptions
-- webstorm: create a node.js configuration with the proper parameters
+#to run the feature tests
+- ./jake feature
 
 #to run the spec tests
 - console: ./node_modules/jasmine-node/bin/jasmine-node spec --captureExceptions
 
-#to run the nodeunit tests
--console: ./node_modules/nodeunit/bin/nodeunit spec/server_test.js
+#to run the node-unit tests
+- ./jake test
+
+#to run lint static analysis
+- ./jake lint
 
 #to run the app locally
 - console : node web.js + open http://localhost:5000
