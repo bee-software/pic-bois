@@ -48,6 +48,20 @@ describe("public/goals.new.html", function() {
 				done();
 			});
 		});
+		
+		it("form to group the creation actors exists", function(done) {
+			browser.visit(page).then(function () {
+		      	expect(browser.query("form")).toBeDefined();
+				done();
+			});
+		});
+		
+		it("form targets new goal creation", function(done) {
+			browser.visit(page).then(function () {
+		      	expect(browser.query("form").action).toEqual("/goals/create");
+				done();
+			});
+		});
 
 	});
 		
