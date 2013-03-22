@@ -30,14 +30,42 @@ describe("public/goals.new.html", function() {
 		
 		it("field to enter goal is ready", function(done) {
 			browser.visit(page).then(function () {
-		      	expect(browser.query("#scoredBy")).toBeDefined();
+		      	expect(browser.query("input#scoredBy")).toBeDefined();
 				done();
 			});
 		});
 		
 		it("field to enter assistant is ready", function(done) {
 			browser.visit(page).then(function () {
-		      	expect(browser.query("#assistedBy")).toBeDefined();
+		      	expect(browser.query("input#assistedBy")).toBeDefined();
+				done();
+			});
+		});
+		
+		it("button to submit form is ready", function(done) {
+			browser.visit(page).then(function () {
+		      	expect(browser.query("button#submit")).toBeDefined();
+				done();
+			});
+		});
+		
+		it("form to group the creation actors exists", function(done) {
+			browser.visit(page).then(function () {
+		      	expect(browser.query("form")).toBeDefined();
+				done();
+			});
+		});
+		
+		it("form targets new goal creation", function(done) {
+			browser.visit(page).then(function () {
+		      	expect(browser.query("form").action).toEqual("/goals/create");
+				done();
+			});
+		});
+		
+		it("forms is setup to post the values of goal creation", function(done) {
+			browser.visit(page).then(function () {
+		      	expect(browser.query("form").method).toEqual("post");
 				done();
 			});
 		});
