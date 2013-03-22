@@ -1,6 +1,6 @@
 function Server(serving) {
 	this.serving = serving;
-};
+}
 
 Server.prototype.start = function() {
 	this.server = require('http').createServer(this.serving).listen(5000, 'localhost');		
