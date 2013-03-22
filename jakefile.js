@@ -1,6 +1,6 @@
 /*global desc, task, jake, complete, fail */
 
-task("default", ["lint"]);
+task("default", ["lint", "test"]);
 
 desc("Static code analysis");
 task("lint", function () {
