@@ -2,7 +2,6 @@
 	"use strict";
 
 	var server = require("./server2.js");
-	var http = require("http");
     var request = require("request");
 
 	exports.setUp = function(done) {
