@@ -62,6 +62,13 @@ describe("public/goals.new.html", function() {
 				done();
 			});
 		});
+		
+		it("forms is setup to post the values of goal creation", function(done) {
+			browser.visit(page).then(function () {
+		      	expect(browser.query("form").method).toEqual("post");
+				done();
+			});
+		});
 
 	});
 		
