@@ -24,7 +24,7 @@
     };
 
     function noRoutes(request, response){
-        response.end()
+        response.end();
     }
 
     function requesting(url, callback){
@@ -35,7 +35,7 @@
         return function(error, response, body) {
             test.equals(response.statusCode, 200, "status code");
             test.done();
-        }
+        };
     }
 
 }());
