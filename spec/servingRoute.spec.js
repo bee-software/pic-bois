@@ -22,7 +22,7 @@ describe("Serving routes", function() {
 		});
 	});
 	
-	it("always serves goals.new.html", function(done) {
+	it("can serve goals.new.html", function(done) {
 		var content = 'what a wonderfull world';
 		fs.writeFileSync(folder + '/goals.new.html', content);
 		
@@ -31,5 +31,12 @@ describe("Serving routes", function() {
 			done();
 		});
 	});
-
+	
+	it("serves confirmation message as html content", function(done) {
+		request("http://localhost:5000/goals/create", function(error, response, body) {
+			expect(response.headers['content-type']).toEqual("text/html");
+			done();
+		});
+	});
+	
 });
