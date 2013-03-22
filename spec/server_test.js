@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	var server = require("./server2.js");
+	var server = require("../src/server2.js");
     var request = require("request");
 
 	exports.setUp = function(done) {
