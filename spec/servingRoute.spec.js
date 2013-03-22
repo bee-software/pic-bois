@@ -32,11 +32,5 @@ describe("Serving routes", function() {
 		});
 	});
 	
-	it("serves confirmation message as html content", function(done) {
-		request("http://localhost:5000/goals/create", function(error, response, body) {
-			expect(response.headers['content-type']).toEqual("text/html");
-			done();
-		});
-	});
 	
 });

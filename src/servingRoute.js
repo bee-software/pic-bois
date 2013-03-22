@@ -1,21 +1,19 @@
 var fs = require('fs');
+Creation = require('./creation');
 
 servingRoute = function(folder) {
+
+	var creation = new Creation();
 	
 	return function (request, response) {
 		response.setHeader("content-type", "text/html");
 		if (request.url == "/goals/create") {
-			var html = "<label id=message>" 
-			+ "saved: goal scored by player 23 and assisted by player 10"
-			+ "</label>";
-			response.write(html);
+			creation.execute(request, response);
 		} else {
 			response.write(fs.readFileSync(folder + '/goals.new.html'));
 		}
 		response.end();			
 	};
-	
-	
 };
 
 module.exports = servingRoute;
