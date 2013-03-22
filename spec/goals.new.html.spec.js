@@ -44,7 +44,7 @@ describe("public/goals.new.html", function() {
 		
 		it("button to submit form is ready", function(done) {
 			browser.visit(page).then(function () {
-		      	expect(browser.text("button#submit")).toEqual("save!");
+		      	expect(browser.query("button#submit")).toBeDefined();
 				done();
 			});
 		});
