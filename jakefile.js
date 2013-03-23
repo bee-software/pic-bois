@@ -44,6 +44,34 @@ task("feature", function () {
     jasmineNode.stderr.on('data', logToConsole);
 });
 
+desc("Start application");
+task("start", function () {
+    var spawn = require('child_process').spawn;
+    var node = spawn('./node_modules/.bin/forever', ['start', 'web.js']);
+
+    function logToConsole(data) {
+        console.log(String(data));
+    }
+
+    node.stdout.on('data', logToConsole);
+    node.stderr.on('data', logToConsole);
+});
+
+
+desc("Stop application");
+task("stop", function () {
+    var spawn = require('child_process').spawn;
+    var node = spawn('./node_modules/.bin/forever', ['start', 'web.js']);
+
+    function logToConsole(data) {
+        console.log(String(data));
+    }
+
+    node.stdout.on('data', logToConsole);
+    node.stderr.on('data', logToConsole);
+});
+
+
 function filesToLint() {
     var files = new jake.FileList();
     files.include("**/*.js");

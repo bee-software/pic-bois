@@ -15,5 +15,6 @@
 - ./jake lint
 
 #to run the app locally
-- console : node web.js + open http://localhost:5000
+- ./jake start + open http://localhost:5000
+- ./jake stop
 - console heroku : install Heroku Toolbelt (https://devcenter.heroku.com/articles/nodejs) + foreman start

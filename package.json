@@ -2,7 +2,7 @@
   "name": "pic-bois",
   "version": "0.0.1",
   "dependencies": {
-	
+    "forever" : "0.10.x"
   },
   "devDependencies": {
 	"zombie" : "1.4.x",
