@@ -8,10 +8,7 @@
 #to run the feature tests
 - ./jake feature
 
-#to run the spec tests
-- console: ./node_modules/jasmine-node/bin/jasmine-node spec --captureExceptions
-
-#to run the node-unit tests
+#to run the unit tests
 - ./jake test
 
 #to run lint static analysis

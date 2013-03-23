@@ -5,16 +5,31 @@ task("default", ["lint", "test"]);
 desc("Static code analysis");
 task("lint", function () {
     var lint = require("./build/lint_runner.js");
-    lint.validateFileList(filesToLint());
+    lint.validateFileList(filesToLint(), lintOptions());
 });
 
-function filesToLint() {
-    var files = new jake.FileList();
-    files.include("**/*.js");
-    files.exclude("build");
-    files.exclude("node_module");
-    return files.toArray();
-}
+
+task("test", ["nodeunit", "jasmine"]);
+
+desc("Test nodeunit");
+task("nodeunit", function () {
+    var nodeunit = require("./build/nodeunit_runner.js");
+    nodeunit.runTests(nodeunitTestFiles(), complete, fail);
+}, {async: true});
+
+desc("Test jasmine");
+task("jasmine", function () {
+    var spawn = require('child_process').spawn;
+    console.log(jasmineTestFiles());
+    var jasmineNode = spawn('./node_modules/.bin/jasmine-node', [ './spec' , '--captureExceptions']);
+
+    function logToConsole(data) {
+        console.log(String(data));
+    }
+
+    jasmineNode.stdout.on('data', logToConsole);
+    jasmineNode.stderr.on('data', logToConsole);
+});
 
 desc("Test features");
 task("feature", function () {
@@ -29,16 +44,45 @@ task("feature", function () {
     jasmineNode.stderr.on('data', logToConsole);
 });
 
-desc("Test node.js code");
-task("test", function () {
-    var nodeunit = require("./build/nodeunit_runner.js");
-    nodeunit.runTests(nodeFilesToTest(), complete, fail);
-}, {async: true});
+function filesToLint() {
+    var files = new jake.FileList();
+    files.include("**/*.js");
+    files.exclude("build");
+    files.exclude("node_module");
+    return files.toArray();
+}
 
-function nodeFilesToTest() {
+function jasmineTestFiles() {
     var testFiles = new jake.FileList();
-    testFiles.include("src/*_test.js");
+    testFiles.include("./spec/*.spec.js");
+    testFiles.exclude("./spec/goals.new.html.spec.js");
+    return testFiles.toArray().toString();
+}
+
+function nodeunitTestFiles() {
+    var testFiles = new jake.FileList();
+    testFiles.include("spec/*_test.js");
+    testFiles.include("features/*_test.js");
     return testFiles.toArray();
 }
 
-
+function lintOptions() {
+    return {
+        // from http://www.jshint.com/docs/#options
+        bitwise: true,
+        curly: false,
+        eqeqeq: false,
+        forin: false,
+        immed: false,
+        latedef: false,
+        newcap: false,
+        noarg: false,
+        noempty: false,
+        nonew: false,
+        regexp: false,
+        undef: false,
+        strict: false,
+        trailing: false,
+        node : true
+    };
+}
