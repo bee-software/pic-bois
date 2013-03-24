@@ -1,10 +1,7 @@
-// Copyright (c) 2012 Titanium I.T. LLC. All rights reserved. See LICENSE.txt for details.
 (function() {
 	"use strict";
 
 	var jasminenode = require("jasmine-node");
-
-	var REPORTER = "default";
 
 	exports.runTests = function(testFiles, success, fail) {
         jasmine.executeSpecsInFolder(jasminenodeOptions(testFiles, done(success, fail)));
