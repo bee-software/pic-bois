@@ -40,7 +40,7 @@ task("start", function () {
 desc("Stop application");
 task("stop", function () {
     var spawn = require('child_process').spawn;
-    var node = spawn('./node_modules/.bin/forever', ['start', 'web.js']);
+    var node = spawn('./node_modules/.bin/forever', ['stop', 'web.js']);
     node.stdout.on('data', logToConsole);
     node.stderr.on('data', logToConsole);
 });
