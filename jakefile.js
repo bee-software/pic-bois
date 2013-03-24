@@ -5,9 +5,9 @@ task("default", ["lint", "test"]);
 desc("Static code analysis");
 task("lint", function () {
     var lint = require("./build/lint_runner.js");
-    lint.validateFileList(filesToLint(), lintOptions());
+    var passed = lint.validateFileList(filesToLint(), lintOptions(), {});
+    if (!passed) fail("Lint failed");
 });
-
 
 task("test", ["nodeunit", "jasmine"]);
 
@@ -19,54 +19,28 @@ task("nodeunit", function () {
 
 desc("Test jasmine");
 task("jasmine", function () {
-    var spawn = require('child_process').spawn;
-    console.log(jasmineTestFiles());
-    var jasmineNode = spawn('./node_modules/.bin/jasmine-node', [ './spec' , '--captureExceptions']);
-
-    function logToConsole(data) {
-        console.log(String(data));
-    }
-
-    jasmineNode.stdout.on('data', logToConsole);
-    jasmineNode.stderr.on('data', logToConsole);
-});
+    var jasminenode = require('./build/jasminenode_runner.js');
+    jasminenode.runTests('./spec', complete, fail);
+},{async: true});
 
 desc("Test features");
 task("feature", function () {
-    var spawn = require('child_process').spawn;
-    var jasmineNode = spawn('./node_modules/.bin/jasmine-node', [ './features' , '--captureExceptions']);
-
-    function logToConsole(data) {
-        console.log(String(data));
-    }
-
-    jasmineNode.stdout.on('data', logToConsole);
-    jasmineNode.stderr.on('data', logToConsole);
-});
+    var jasminenode = require('./build/jasminenode_runner.js');
+    jasminenode.runTests('./features', complete, fail);
+},{async: true});
 
 desc("Start application");
 task("start", function () {
     var spawn = require('child_process').spawn;
     var node = spawn('./node_modules/.bin/forever', ['start', 'web.js']);
-
-    function logToConsole(data) {
-        console.log(String(data));
-    }
-
     node.stdout.on('data', logToConsole);
     node.stderr.on('data', logToConsole);
 });
-
 
 desc("Stop application");
 task("stop", function () {
     var spawn = require('child_process').spawn;
     var node = spawn('./node_modules/.bin/forever', ['start', 'web.js']);
-
-    function logToConsole(data) {
-        console.log(String(data));
-    }
-
     node.stdout.on('data', logToConsole);
     node.stderr.on('data', logToConsole);
 });
@@ -78,13 +52,6 @@ function filesToLint() {
     files.exclude("build");
     files.exclude("node_module");
     return files.toArray();
-}
-
-function jasmineTestFiles() {
-    var testFiles = new jake.FileList();
-    testFiles.include("./spec/*.spec.js");
-    testFiles.exclude("./spec/goals.new.html.spec.js");
-    return testFiles.toArray().toString();
 }
 
 function nodeunitTestFiles() {
@@ -113,4 +80,8 @@ function lintOptions() {
         trailing: false,
         node : true
     };
+}
+
+function logToConsole(data) {
+    console.log(String(data));
 }
