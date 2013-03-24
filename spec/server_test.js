@@ -20,7 +20,7 @@
 
     exports.test_isAliveOnPort5000 = function(test) {
         requesting("http://localhost:5000",
-            shouldReturnStatutCode200(test));
+            returnsStatutCode200(test));
     };
 
     function noRoutes(request, response){
@@ -31,7 +31,7 @@
         request(url, callback);
     }
 
-    function shouldReturnStatutCode200(test) {
+    function returnsStatutCode200(test) {
         return function(error, response, body) {
             test.equals(response.statusCode, 200, "status code");
             test.done();
