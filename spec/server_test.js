@@ -5,7 +5,7 @@
     var request = require("request");
 
 	exports.setUp = function(done) {
-		server.start(noRoutes, function() {
+		server.start(dummyRouter, function() {
             console.log("Server started");
 			done();
 		});
@@ -23,7 +23,7 @@
             returnsStatutCode200(test));
     };
 
-    function noRoutes(request, response){
+    function dummyRouter(request, response){
         response.end();
     }
 
