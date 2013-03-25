@@ -1,14 +1,16 @@
 (function () {
     "use strict";
 
-    var server = require('./src/server2.js');
-    var router = require('./src/router.js');
-    var fs = require('fs');
-    var qs = require('querystring');
+    var server = require('./src/server2');
+    var router = require('./src/router');
+    var Goal = require('./src/goal');
 
     exports.start = function () {
-        router.addGet("/goals/new", newGoal);
-        router.addPost("/goals/create", createGoal);
+        var goal = new Goal();
+
+        router.addGet("/goals/new", goal.serveNewGoalPage);
+        router.addPost("/goals/create", goal.createGoalFromRequest);
+
         server.start(router.route, function () {
             console.log("app started");
         });
@@ -19,36 +21,6 @@
             console.log("app stopped");
         });
     };
-
-    function newGoal(request, response) {
-        response.setHeader("content-type", "text/html");
-        response.write(fs.readFileSync('./pages/goals.new.html'));
-        response.end();
-    }
-
-    function createGoal(request, response) {
-
-        var body = '';
-
-        request.on('data', function (chunk) {
-            body += chunk;
-        });
-
-        request.on('end', function () {
-            var post = qs.parse(body);
-            var scoredBy = post.scoredBy;
-            var assistedBy = post.assistedBy;
-
-            response.setHeader("content-type", "text/html");
-            response.write("<label id=\"message\">saved: goal scored by player " +
-                scoredBy +
-                " and assisted by player " +
-                assistedBy +
-                "</label>");
-            response.end();
-
-        });
-    }
 
 }());
 
