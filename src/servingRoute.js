@@ -23,14 +23,14 @@ servingRoute = function(folder) {
 				creation.execute(params.scoredBy, params.assistedBy, response);
 			});
 			
-		} 
+		} else 
 		
 		if (incomingMessage.url == '/goals/new') {
 			response.write(fs.readFileSync(folder + '/goals.new.html'));
 			response.end();			
 		}
 		
-		response.end();
+		else { response.end(); }
 	};
 };
 
