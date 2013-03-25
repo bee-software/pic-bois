@@ -1,11 +1,9 @@
 Browser = require("zombie");
-Server = require("../src/server");
-var servingRouteWithFolder = require("../src/servingRoute");
+var server = require("../web");
 
 describe("submit goal", function () {
 
     var browser = new Browser();
-    var server = new Server(servingRouteWithFolder("pages"));
 
     beforeEach(function () {
         server.start();
