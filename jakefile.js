@@ -9,7 +9,7 @@ task("lint", function () {
     if (!passed) fail("Lint failed");
 });
 
-task("test", ["nodeunit", "jasmine"]);
+task("test", ["jasmine"]);
 
 desc("Test nodeunit");
 task("nodeunit", function () {
