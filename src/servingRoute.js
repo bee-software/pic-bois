@@ -1,12 +1,12 @@
-var fs = require('fs');
-var qs = require('querystring');
-Creation = require('./creation');
+var fs = require("fs");
+var qs = require("querystring");
+Creation = require("./creation");
 
 
 servingRoute = function(folder) {
 
 	var creation = new Creation();
-	creation.setMessageTemplate(fs.readFileSync(folder + '/message.html'));
+	creation.setMessageTemplate(fs.readFileSync(folder + "/message.html"));
 	
 	return function (incomingMessage, response) {
 		response.setHeader("content-type", "text/html");
@@ -14,19 +14,19 @@ servingRoute = function(folder) {
 		if (incomingMessage.url === "/goals/create") {
 			
 			var body = "";
-			incomingMessage.on('data', function(chunk) {
+			incomingMessage.on("data", function(chunk) {
 				body += chunk;
 			});
 			
-			incomingMessage.on('end', function() {
+			incomingMessage.on("end", function() {
 				params = qs.parse(body);
 				creation.execute(params.scoredBy, params.assistedBy, response);
 			});
 			
 		} else 
 		
-		if (incomingMessage.url === '/goals/new') {
-			response.write(fs.readFileSync(folder + '/goals.new.html'));
+		if (incomingMessage.url === "/goals/new") {
+			response.write(fs.readFileSync(folder + "/goals.new.html"));
 			response.end();			
 		}
 		

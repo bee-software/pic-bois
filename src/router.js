@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    var flaskRouter = require('flask-router')();
+    var flaskRouter = require("flask-router")();
 
     exports.addPost = function(path, callback){
         flaskRouter.post(path, callback);

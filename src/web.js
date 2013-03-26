@@ -1,10 +1,10 @@
 (function () {
     "use strict";
 
-    var Server = require('./server');
-    var router = require('./router');
-    var Goal = require('./goal');
-    var LandingPage = require('./landingPage');
+    var Server = require("./server");
+    var router = require("./router");
+    var Goal = require("./goal");
+    var LandingPage = require("./landingPage");
 
     var server = new Server(router.route);
 
@@ -26,7 +26,7 @@
 }());
 
 if (require.main === module) {
-    var web = require('./web');
+    var web = require("./web");
     web.start();
 }
 

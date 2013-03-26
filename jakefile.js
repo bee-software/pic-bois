@@ -23,30 +23,30 @@
 
     desc("Test jasmine");
     task("jasmine", function () {
-        var jasminenode = require('./build/jasminenode_runner.js');
-        jasminenode.runTests('./spec', complete, fail);
+        var jasminenode = require("./build/jasminenode_runner.js");
+        jasminenode.runTests("./spec", complete, fail);
     }, {async: true});
 
     desc("Test features");
     task("feature", function () {
-        var jasminenode = require('./build/jasminenode_runner.js');
-        jasminenode.runTests('./features', complete, fail);
+        var jasminenode = require("./build/jasminenode_runner.js");
+        jasminenode.runTests("./features", complete, fail);
     }, {async: true});
 
     desc("Start application localy");
     task("start", function () {
-        var spawn = require('child_process').spawn;
-        var node = spawn('./node_modules/.bin/forever', ['start', 'src/web.js']);
-        node.stdout.on('data', logToConsole);
-        node.stderr.on('data', logToConsole);
+        var spawn = require("child_process").spawn;
+        var node = spawn("./node_modules/.bin/forever", ["start", "src/web.js"]);
+        node.stdout.on("data", logToConsole);
+        node.stderr.on("data", logToConsole);
     });
 
     desc("Stop application localy");
     task("stop", function () {
-        var spawn = require('child_process').spawn;
-        var node = spawn('./node_modules/.bin/forever', ['stop', 'src/web.js']);
-        node.stdout.on('data', logToConsole);
-        node.stderr.on('data', logToConsole);
+        var spawn = require("child_process").spawn;
+        var node = spawn("./node_modules/.bin/forever", ["stop", "src/web.js"]);
+        node.stdout.on("data", logToConsole);
+        node.stderr.on("data", logToConsole);
     });
 
     desc("Deploy application");
@@ -82,10 +82,12 @@
             immed: true,
             indent: 4,
             latedef: true,
-            newcap: false,
-            noarg: false,
-            noempty: false,
-            nonew: false,
+            newcap: true,
+            noarg: true,
+            noempty: true,
+            nonew: true,
+            plusplus: false,
+            quotmark: "double",
             regexp: false,
             undef: false,
             strict: false,

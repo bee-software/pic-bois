@@ -1,5 +1,5 @@
-var Server = require('../src/server.js');
-var request = require('request');
+var Server = require("../src/server");
+var request = require("request");
 
 describe("Server", function () {
 

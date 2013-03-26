@@ -1,6 +1,6 @@
-var Server = require('../src/server.js');
-var router = require('../src/router.js');
-var request = require('request');
+var Server = require("../src/server");
+var router = require("../src/router");
+var request = require("request");
 
 describe("Router", function () {
 
@@ -26,7 +26,7 @@ describe("Router", function () {
 
     it("routes configured post method", function (done) {
         router.addPost("/goal", mockCallback);
-        request.post("http://localhost:5000/goal", {form: {key: 'value'}}, function (error, response, body) {
+        request.post("http://localhost:5000/goal", {form: {key: "value"}}, function (error, response, body) {
             expect(response.statusCode).toEqual(200);
             expect(method).toEqual("POST");
             expect(url).toEqual("/goal");
@@ -49,7 +49,7 @@ describe("Router", function () {
         method = request.method;
         url = request.url;
 
-        request.on('data', function (chunk) {
+        request.on("data", function (chunk) {
             data = chunk.toString();
         });
 

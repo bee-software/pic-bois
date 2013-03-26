@@ -1,4 +1,4 @@
-Creation = require('../src/creation.js');
+Creation = require("../src/creation");
 
 describe("Creation", function() {
 
@@ -7,7 +7,7 @@ describe("Creation", function() {
 	var response = { write : function() {}, end : function(){} };
 	
 	beforeEach(function() {
-		spyOn(template, 'toString').andReturn("<any>this message is awesome</any>");
+		spyOn(template, "toString").andReturn("<any>this message is awesome</any>");
 		creation.setMessageTemplate(template);
 	});
 
@@ -19,7 +19,7 @@ describe("Creation", function() {
 	});
 	
 	it("insert the correct message into the template", function(done) {
-		spyOn(response, 'write');
+		spyOn(response, "write");
 		creation.execute("23", "10", response);
 		
 		expect(response.write).toHaveBeenCalledWith("<any>saved: goal scored by player 23 and assisted by player 10</any>");
