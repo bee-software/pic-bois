@@ -1,24 +1,20 @@
-describe("Router", function () {
+var Server = require('../src/server.js');
+var router = require('../src/router.js');
+var request = require('request');
 
-    var server = require('../src/server2.js');
-    var router = require('../src/router.js');
-    var request = require('request');
-    var fs = require('fs');
+describe("Router", function () {
 
     var method;
     var url;
     var data;
+    var server = new Server(router.route);
 
     beforeEach(function () {
-        server.start(router.route, function () {
-            console.log("Server started");
-        });
+        server.start();
     });
 
     afterEach(function () {
-        server.stop(function () {
-            console.log("Server stopped");
-        });
+        server.stop();
     });
 
     it("routes all path to 404 by default", function (done) {
