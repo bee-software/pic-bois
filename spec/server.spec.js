@@ -3,7 +3,9 @@ var request = require('request');
 
 describe("Server", function () {
 
-    var server = new Server(dummyRouter);
+    var server = new Server(function dummyRouter(request, response) {
+        response.end();
+    });
 
     beforeEach(function () {
         server.start();
@@ -22,10 +24,6 @@ describe("Server", function () {
         requesting("http://localhost:5000",
             returnsStatutCode200(done));
     });
-
-    function dummyRouter(request, response) {
-        response.end();
-    }
 
     function requesting(url, assertionCallback) {
         request(url, assertionCallback);
