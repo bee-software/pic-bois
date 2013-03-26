@@ -6,7 +6,9 @@ desc("Static code analysis");
 task("lint", function () {
     var lint = require("./build/lint_runner.js");
     var passed = lint.validateFileList(filesToLint(), lintOptions(), {});
-    if (!passed) fail("Lint failed");
+    if (!passed) {
+        fail("Lint failed");
+    }
 });
 
 task("test", ["jasmine"]);
@@ -71,7 +73,7 @@ function lintOptions() {
     return {
         // from http://www.jshint.com/docs/#options
         bitwise: true,
-        curly: false,
+        curly: true,
         eqeqeq: false,
         forin: false,
         immed: false,

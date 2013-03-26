@@ -8,9 +8,15 @@ describe("Serving routes", function() {
 	var folder = 'spec/test-folder';
 	
 	beforeEach(function() {	
-		if (!fs.existsSync(folder)) fs.mkdirSync(folder);			
-		if (!fs.existsSync(folder + '/message.html')) fs.writeFileSync(folder + '/message.html', "any");
-		if (!fs.existsSync(folder + '/goals.new.html')) fs.writeFileSync(folder + '/goals.new.html', "any");
+		if (!fs.existsSync(folder)) {
+            fs.mkdirSync(folder);
+        }
+		if (!fs.existsSync(folder + '/message.html')) {
+            fs.writeFileSync(folder + '/message.html', "any");
+        }
+		if (!fs.existsSync(folder + '/goals.new.html')) {
+            fs.writeFileSync(folder + '/goals.new.html', "any");
+        }
 
 		server = require('http').createServer(servingRouteWithFolder(folder)).listen(5000);		
 	});
