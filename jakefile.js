@@ -89,9 +89,9 @@
             plusplus: false,
             quotmark: "double",
             undef: true,
-            unused: false, // TODO: not sure about this one, ask Eric
-            strict: false,
-            trailing: false,
+            unused: false, // not sure about this one, ask Eric
+            strict: false, // not sure about this one, ask Eric
+            trailing: true,
             node: true
         };
     }

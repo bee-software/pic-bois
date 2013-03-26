@@ -1,4 +1,5 @@
-Browser = require("zombie");
+/*global describe, beforeEach, afterEach, it, expect */
+var Browser = require("zombie");
 var webapp = require("../src/web");
 
 describe("submit goal", function () {
@@ -36,5 +37,3 @@ describe("submit goal", function () {
     });
 
 });
-
-		
