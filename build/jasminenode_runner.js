@@ -1,7 +1,7 @@
 (function() {
 	"use strict";
 
-	var jasminenode = require("jasmine-node");
+	var jasmine = require("jasmine-node");
 
 	exports.runTests = function(testFiles, success, fail) {
         jasmine.executeSpecsInFolder(jasminenodeOptions(testFiles, done(success, fail)));
