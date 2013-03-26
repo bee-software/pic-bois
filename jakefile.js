@@ -74,7 +74,7 @@ function lintOptions() {
         // from http://www.jshint.com/docs/#options
         bitwise: true,
         curly: true,
-        eqeqeq: false,
+        eqeqeq: true,
         forin: false,
         immed: false,
         latedef: false,

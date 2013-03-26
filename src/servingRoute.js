@@ -11,7 +11,7 @@ servingRoute = function(folder) {
 	return function (incomingMessage, response) {
 		response.setHeader("content-type", "text/html");
 		
-		if (incomingMessage.url == "/goals/create") {
+		if (incomingMessage.url === "/goals/create") {
 			
 			var body = "";
 			incomingMessage.on('data', function(chunk) {
@@ -25,7 +25,7 @@ servingRoute = function(folder) {
 			
 		} else 
 		
-		if (incomingMessage.url == '/goals/new') {
+		if (incomingMessage.url === '/goals/new') {
 			response.write(fs.readFileSync(folder + '/goals.new.html'));
 			response.end();			
 		}
