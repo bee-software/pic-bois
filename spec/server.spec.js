@@ -1,10 +1,41 @@
 var Server = require('../src/server.js');
+var request = require('request');
 
-describe("Server", function() {
+describe("Server", function () {
 
-	it("can be instantiated", function(done) {
-		expect(new Server()).toNotBe(null);
-		done();
-	});
-	
+    var server = new Server(dummyRouter);
+
+    beforeEach(function () {
+        server.start();
+    });
+
+    afterEach(function () {
+        server.stop();
+    });
+
+    it("can be instantiated", function (done) {
+        expect(server).toNotBe(null);
+        done();
+    });
+
+    it("is alive on port 5000", function (done) {
+        requesting("http://localhost:5000",
+            returnsStatutCode200(done));
+    });
+
+    function dummyRouter(request, response) {
+        response.end();
+    }
+
+    function requesting(url, assertionCallback) {
+        request(url, assertionCallback);
+    }
+
+    function returnsStatutCode200(done) {
+        return function (error, response, body) {
+            expect(response.statusCode).toBe(200);
+            done();
+        };
+    }
+
 });
