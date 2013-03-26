@@ -1,9 +1,11 @@
 (function () {
     "use strict";
 
-    var server = require('./src/server2');
-    var router = require('./src/router');
-    var Goal = require('./src/goal');
+    var Server = require('./server');
+    var router = require('./router');
+    var Goal = require('./goal');
+
+    var server = new Server(router.route);
 
     exports.start = function () {
         var goal = new Goal();
@@ -11,15 +13,11 @@
         router.addGet("/goals/new", goal.serveNewGoalPage);
         router.addPost("/goals/create", goal.createGoalFromRequest);
 
-        server.start(router.route, function () {
-            console.log("app started");
-        });
+        server.start();
     };
 
     exports.stop = function (){
-        server.stop(function () {
-            console.log("app stopped");
-        });
+        server.stop();
     };
 
 }());

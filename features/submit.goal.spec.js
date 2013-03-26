@@ -1,5 +1,5 @@
 Browser = require("zombie");
-var webapp = require("../web");
+var webapp = require("../src/web");
 
 describe("submit goal", function () {
 

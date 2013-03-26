@@ -32,7 +32,7 @@ task("feature", function () {
 desc("Start application localy");
 task("start", function () {
     var spawn = require('child_process').spawn;
-    var node = spawn('./node_modules/.bin/forever', ['start', 'web.js']);
+    var node = spawn('./node_modules/.bin/forever', ['start', 'src/web.js']);
     node.stdout.on('data', logToConsole);
     node.stderr.on('data', logToConsole);
 });
@@ -40,7 +40,7 @@ task("start", function () {
 desc("Stop application localy");
 task("stop", function () {
     var spawn = require('child_process').spawn;
-    var node = spawn('./node_modules/.bin/forever', ['stop', 'web.js']);
+    var node = spawn('./node_modules/.bin/forever', ['stop', 'src/web.js']);
     node.stdout.on('data', logToConsole);
     node.stderr.on('data', logToConsole);
 });
