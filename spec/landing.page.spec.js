@@ -1,6 +1,7 @@
-Browser = require("zombie");
-Server = require("../src/server");
-LandingPage = require("../src/landingPage");
+/*global describe, beforeEach, afterEach, it, expect */
+var Browser = require("zombie");
+var Server = require("../src/server");
+var LandingPage = require("../src/landingPage");
 var router = require("../src/router");
 
 

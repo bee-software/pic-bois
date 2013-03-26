@@ -1,3 +1,4 @@
+/*global describe, beforeEach, afterEach, it, expect */
 var Server = require("../src/server");
 var router = require("../src/router");
 var request = require("request");

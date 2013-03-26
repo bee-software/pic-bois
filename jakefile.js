@@ -88,8 +88,8 @@
             nonew: true,
             plusplus: false,
             quotmark: "double",
-            regexp: false,
-            undef: false,
+            undef: true,
+            unused: false, // TODO: not sure about this one, ask Eric
             strict: false,
             trailing: false,
             node: true

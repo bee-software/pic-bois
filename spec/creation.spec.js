@@ -1,4 +1,5 @@
-Creation = require("../src/creation");
+/*global describe, beforeEach, it, spyOn, expect */
+var Creation = require("../src/creation");
 
 describe("Creation", function() {
 

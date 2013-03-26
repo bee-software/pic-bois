@@ -1,9 +1,9 @@
 var fs = require("fs");
 var qs = require("querystring");
-Creation = require("./creation");
+var Creation = require("./creation");
 
 
-servingRoute = function(folder) {
+var servingRoute = function(folder) {
 
 	var creation = new Creation();
 	creation.setMessageTemplate(fs.readFileSync(folder + "/message.html"));
@@ -19,7 +19,7 @@ servingRoute = function(folder) {
 			});
 			
 			incomingMessage.on("end", function() {
-				params = qs.parse(body);
+				var params = qs.parse(body);
 				creation.execute(params.scoredBy, params.assistedBy, response);
 			});
 			
