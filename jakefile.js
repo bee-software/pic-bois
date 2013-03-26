@@ -73,7 +73,7 @@
 
     function lintOptions() {
         return {
-            // from http://www.jshint.com/docs/#options
+            // from ./node_modules/jshint/examples/.jshintrc
             bitwise: true,
             camelcase: true,
             curly: true,
@@ -92,7 +92,9 @@
             unused: false, // not sure about this one, ask Eric
             strict: false, // not sure about this one, ask Eric
             trailing: true,
+            maxdepth: 2,
             node: true
+//            browser : true // for client-side code
         };
     }
 
