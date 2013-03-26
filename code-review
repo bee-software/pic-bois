@@ -1,0 +1,17 @@
+A ce code, je donne 7/10
+
+Ce que j'aime :
+- les tests passent
+- la feature utilise le code du script web.js ce qui supprime une duplication
+- on voit un exemple de get et un example de post
+- l'analyse statique lint est positive
+- jake permet de centraliser la connaissance à propos de comment lancer les tests
+- les tests du router
+
+
+Pour 10/10 :
+- ne pas utiliser flask-router mais le coder à la main
+- supprimer tout le code non utilisé
+- sortir les actions spécifiques du web.js dans des classes à part
+- organiser les fichiers de manière à rendre visible le code indépendant de node
+- être sûr que je pourrais déployer ce code sur Heroku

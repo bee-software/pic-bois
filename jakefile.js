@@ -9,7 +9,7 @@ task("lint", function () {
     if (!passed) fail("Lint failed");
 });
 
-task("test", ["nodeunit", "jasmine"]);
+task("test", ["jasmine"]);
 
 desc("Test nodeunit");
 task("nodeunit", function () {
@@ -29,22 +29,28 @@ task("feature", function () {
     jasminenode.runTests('./features', complete, fail);
 },{async: true});
 
-desc("Start application");
+desc("Start application localy");
 task("start", function () {
     var spawn = require('child_process').spawn;
-    var node = spawn('./node_modules/.bin/forever', ['start', 'web.js']);
+    var node = spawn('./node_modules/.bin/forever', ['start', 'src/web.js']);
     node.stdout.on('data', logToConsole);
     node.stderr.on('data', logToConsole);
 });
 
-desc("Stop application");
+desc("Stop application localy");
 task("stop", function () {
     var spawn = require('child_process').spawn;
-    var node = spawn('./node_modules/.bin/forever', ['start', 'web.js']);
+    var node = spawn('./node_modules/.bin/forever', ['stop', 'src/web.js']);
     node.stdout.on('data', logToConsole);
     node.stderr.on('data', logToConsole);
 });
 
+desc("Deploy application");
+task("deploy", function(){
+    console.log("1. run git push heroku master");
+    console.log("    or git push heroku branch:master (if not on master)");
+    console.log("2. run release test (not written yet!)");
+});
 
 function filesToLint() {
     var files = new jake.FileList();

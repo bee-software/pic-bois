@@ -1,16 +1,16 @@
 Browser = require("zombie");
-var server = require("../web");
+var webapp = require("../src/web");
 
 describe("submit goal", function () {
 
     var browser = new Browser();
 
     beforeEach(function () {
-        server.start();
+        webapp.start();
     });
 
     afterEach(function () {
-        server.stop();
+        webapp.stop();
     });
 
     it("offers a way to submit a goal", function (done) {
@@ -24,7 +24,7 @@ describe("submit goal", function () {
         });
     });
 
-    it("displays the players numbers in the saved message", function (done) {
+    it("displays the players' numbers in the saved message", function (done) {
         browser.visit("http://localhost:5000/goals/new", function () {
             browser.fill("#scoredBy", "99");
             browser.fill("#assistedBy", "66");

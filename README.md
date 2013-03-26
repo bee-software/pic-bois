@@ -1,6 +1,7 @@
 #requirements
 - Install node: http://nodejs.org/
 - Install make: on mac http://stackoverflow.com/questions/10265742/how-to-install-make-and-gcc-on-a-mac
+- Install Heroku Toolbelt: https://devcenter.heroku.com/articles/nodejs
 
 #setup
 - npm install
@@ -17,4 +18,6 @@
 #to run the app locally
 - ./jake start + open http://localhost:5000
 - ./jake stop
-- console heroku : install Heroku Toolbelt (https://devcenter.heroku.com/articles/nodejs) + foreman start
+
+#to deploy on heroku
+- ./jake deploy

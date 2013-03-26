@@ -1,11 +1,15 @@
 Browser = require("zombie");
 Server = require("../src/server");
-servingRouteWithFolder = require("../src/servingRoute");
+Goal = require("../src/goal");
+var router = require("../src/router");
 
 describe("public/goals.new.html", function () {
 
-    var page = "http://localhost:5000/goals/new";
-    var server = new Server(servingRouteWithFolder("pages"));
+    var path = "/goals/new";
+    var page = "http://localhost:5000" + path;
+    var server = new Server(router.route);
+    var goal = new Goal();
+    router.addGet(path, goal.serveNewGoalPage);
     var browser = new Browser();
 
     beforeEach(function () {
