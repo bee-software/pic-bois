@@ -29,4 +29,3 @@ if (require.main === module) {
     var web = require("./web");
     web.start();
 }
-
