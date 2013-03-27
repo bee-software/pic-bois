@@ -11,7 +11,7 @@
         return {
             specFolder: testsFiles,
             onComplete: done,
-            isVerbose: true,
+            isVerbose: false,
             showColors: true,
             teamcity: false,
             useRequireJs: false,
