@@ -3,6 +3,11 @@
 
     var fs = require("fs");
     var qs = require("querystring");
+    var GoalCreation = require("./goal_creation");
+    var GoalCreatedRender = require("./goal_created_renderer");
+
+    var goalCreation = new GoalCreation();
+    var renderer = new GoalCreatedRender();
 
     function Goal() {
     }
@@ -23,27 +28,10 @@
 
         request.on("end", function () {
             var post = qs.parse(body);
-
-            var GoalCreation = require("./goal_creation");
-            var goalCreation = new GoalCreation();
-
-            goalCreation.execute(post, renderer(response));
+            goalCreation.execute(post, renderer.render(response));
             response.end();
         });
     };
-
-    function renderer(response) {
-        return function render(scoredBy, assistedBy){
-            var messageToken = "this message is awesome";
-
-            response.setHeader("content-type", "text/html");
-            var template = fs.readFileSync("./pages/message.html");
-            var html = template.toString()
-                        .replace(messageToken,
-                            "saved: goal scored by player " + scoredBy + " and assisted by player " + assistedBy);
-            response.write(html);
-        };
-    }
 
     module.exports = Goal;
 }());
