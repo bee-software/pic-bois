@@ -1,14 +1,14 @@
 var messageToken = "this message is awesome";
 
-function Creation() {
+function GoalCreation() {
 
 }
 
-Creation.prototype.setMessageTemplate = function (template) {
+GoalCreation.prototype.setMessageTemplate = function (template) {
     this.template = template;
 };
 
-Creation.prototype.execute = function (scoredBy, assistedBy, response) {
+GoalCreation.prototype.execute = function (scoredBy, assistedBy, response) {
     var html = this.template.toString()
         .replace(messageToken,
             "saved: goal scored by player " + scoredBy + " and assisted by player " + assistedBy);
@@ -17,4 +17,4 @@ Creation.prototype.execute = function (scoredBy, assistedBy, response) {
     response.end();
 };
 
-module.exports = Creation;
+module.exports = GoalCreation;

@@ -1,7 +1,7 @@
 /*global describe, beforeEach, it, spyOn, expect */
-var Creation = require("../src/creation");
+var Creation = require("../src/goal_creation");
 
-describe("Creation", function () {
+describe("GoalCreation", function () {
 
     var creation = new Creation();
     var template = { toString: function () {} };

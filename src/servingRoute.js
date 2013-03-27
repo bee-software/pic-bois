@@ -1,6 +1,6 @@
 var fs = require("fs");
 var qs = require("querystring");
-var Creation = require("./creation");
+var Creation = require("./goal_creation");
 
 
 var servingRoute = function (folder) {
