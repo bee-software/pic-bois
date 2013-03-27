@@ -12,7 +12,6 @@
     };
 
     exports.route = function (request, response) {
-        console.log("Route " + request.method + " " + request.url);
         flaskRouter.route(request, response);
     };
 
