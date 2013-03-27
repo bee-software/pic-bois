@@ -1,32 +1,16 @@
 /*global describe, beforeEach, it, spyOn, expect */
-var Creation = require("../src/goal_creation");
+var GoalCreation = require("../src/goal_creation");
 
 describe("GoalCreation", function () {
 
-    var creation = new Creation();
-    var template = { toString: function () {} };
-    var response = { write: function () {}, end: function () {} };
+    var creation = new GoalCreation();
 
-    beforeEach(function () {
-        spyOn(template, "toString").andReturn("<any>this message is awesome</any>");
-        creation.setRenderer(template);
-    });
+    it("tells to render the goal", function () {
+        var renderer = { render : function(scoredBy, assistedBy) {} };
+        spyOn(renderer, "render");
+        creation.execute({ scoredBy : "12", assistedBy : "13"}, renderer.render);
 
-    it("reads the message from a template", function (done) {
-        var post = {scoredBy:"23", assistedBy:"10"};
-        creation.execute(post, response);
-
-        expect(template.toString).toHaveBeenCalled();
-        done();
-    });
-
-    it("insert the correct message into the template", function (done) {
-        spyOn(response, "write");
-        var post = {scoredBy:"23", assistedBy:"10"};
-        creation.execute(post, response);
-
-        expect(response.write).toHaveBeenCalledWith("<any>saved: goal scored by player 23 and assisted by player 10</any>");
-        done();
+        expect(renderer.render).toHaveBeenCalledWith("12", "13");
     });
 
 });

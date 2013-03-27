@@ -1,26 +1,16 @@
 (function() {
     "use strict";
 
-    var messageToken = "this message is awesome";
 
     function GoalCreation() {
     }
 
-    GoalCreation.prototype.setRenderer = function (renderer) {
-        this.template = renderer;
-    };
-
-    GoalCreation.prototype.execute = function (post, response) {
+    GoalCreation.prototype.execute = function (post, render) {
 
         var scoredBy = post.scoredBy;
         var assistedBy = post.assistedBy;
 
-        var html = this.template.toString()
-            .replace(messageToken,
-                "saved: goal scored by player " + scoredBy + " and assisted by player " + assistedBy);
-
-        response.write(html);
-        response.end();
+        render(scoredBy, assistedBy);
     };
 
     module.exports = GoalCreation;
