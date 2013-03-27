@@ -26,13 +26,11 @@
             var scoredBy = post.scoredBy;
             var assistedBy = post.assistedBy;
 
-            response.setHeader("content-type", "text/html");
-            response.write("<label id=\"message\">saved: goal scored by player " +
-                scoredBy +
-                " and assisted by player " +
-                assistedBy +
-                "</label>");
-            response.end();
+            var GoalCreation = require("./goal_creation");
+            var goalCreation = new GoalCreation(/* renderer*/);
+
+            goalCreation.setRenderer(fs.readFileSync("./pages/message.html"));
+            goalCreation.execute(scoredBy, assistedBy, response);
 
         });
     };

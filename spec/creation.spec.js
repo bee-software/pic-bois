@@ -9,7 +9,7 @@ describe("GoalCreation", function () {
 
     beforeEach(function () {
         spyOn(template, "toString").andReturn("<any>this message is awesome</any>");
-        creation.setMessageTemplate(template);
+        creation.setRenderer(template);
     });
 
     it("reads the message from a template", function (done) {

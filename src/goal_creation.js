@@ -1,20 +1,23 @@
-var messageToken = "this message is awesome";
+(function() {
+    "use strict";
 
-function GoalCreation() {
+    var messageToken = "this message is awesome";
 
-}
+    function GoalCreation() {
+    }
 
-GoalCreation.prototype.setMessageTemplate = function (template) {
-    this.template = template;
-};
+    GoalCreation.prototype.setRenderer = function (renderer) {
+        this.template = renderer;
+    };
 
-GoalCreation.prototype.execute = function (scoredBy, assistedBy, response) {
-    var html = this.template.toString()
-        .replace(messageToken,
-            "saved: goal scored by player " + scoredBy + " and assisted by player " + assistedBy);
+    GoalCreation.prototype.execute = function (scoredBy, assistedBy, response) {
+        var html = this.template.toString()
+            .replace(messageToken,
+                "saved: goal scored by player " + scoredBy + " and assisted by player " + assistedBy);
 
-    response.write(html);
-    response.end();
-};
+        response.write(html);
+        response.end();
+    };
 
-module.exports = GoalCreation;
+    module.exports = GoalCreation;
+}());
