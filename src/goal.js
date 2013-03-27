@@ -23,14 +23,13 @@
 
         request.on("end", function () {
             var post = qs.parse(body);
-            var scoredBy = post.scoredBy;
-            var assistedBy = post.assistedBy;
+
 
             var GoalCreation = require("./goal_creation");
             var goalCreation = new GoalCreation(/* renderer*/);
 
             goalCreation.setRenderer(fs.readFileSync("./pages/message.html"));
-            goalCreation.execute(scoredBy, assistedBy, response);
+            goalCreation.execute(post, response);
 
         });
     };

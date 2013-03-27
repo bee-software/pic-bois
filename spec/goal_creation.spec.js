@@ -13,7 +13,8 @@ describe("GoalCreation", function () {
     });
 
     it("reads the message from a template", function (done) {
-        creation.execute(null, null, response);
+        var post = {scoredBy:"23", assistedBy:"10"};
+        creation.execute(post, response);
 
         expect(template.toString).toHaveBeenCalled();
         done();
@@ -21,7 +22,8 @@ describe("GoalCreation", function () {
 
     it("insert the correct message into the template", function (done) {
         spyOn(response, "write");
-        creation.execute("23", "10", response);
+        var post = {scoredBy:"23", assistedBy:"10"};
+        creation.execute(post, response);
 
         expect(response.write).toHaveBeenCalledWith("<any>saved: goal scored by player 23 and assisted by player 10</any>");
         done();

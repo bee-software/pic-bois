@@ -10,7 +10,11 @@
         this.template = renderer;
     };
 
-    GoalCreation.prototype.execute = function (scoredBy, assistedBy, response) {
+    GoalCreation.prototype.execute = function (post, response) {
+
+        var scoredBy = post.scoredBy;
+        var assistedBy = post.assistedBy;
+
         var html = this.template.toString()
             .replace(messageToken,
                 "saved: goal scored by player " + scoredBy + " and assisted by player " + assistedBy);
