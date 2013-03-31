@@ -6,7 +6,7 @@ describe("Server", function () {
 
     var server = new Server(function dummyRouter(request, response) {
         response.end();
-    });
+    }, 5000);
 
     beforeEach(function () {
         server.start();

@@ -9,7 +9,7 @@ describe("Router", function () {
     var url;
     var data;
     var router = new Router();
-    var server = new Server(router.route);
+    var server = new Server(router.route, 5000);
 
     beforeEach(function () {
         server.start();

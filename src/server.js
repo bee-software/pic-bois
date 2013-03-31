@@ -3,12 +3,13 @@
 
     var http = require("http");
 
-    function Server(serving) {
+    function Server(serving, port) {
         this.serving = serving;
+        this.port = port;
     }
 
     Server.prototype.start = function() {
-        this.server = http.createServer(this.serving).listen(process.env.PORT || 5000);
+        this.server = http.createServer(this.serving).listen(this.port);
     };
 
     Server.prototype.stop = function() {

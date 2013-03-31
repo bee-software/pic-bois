@@ -7,7 +7,7 @@
     var LandingPage = require("./landingPage");
 
     var router = new Router();
-    var server = new Server(router.route);
+    var server = new Server(router.route, process.env.PORT || 5000);
 
     exports.start = function () {
         var goal = new Goal();

@@ -12,7 +12,7 @@ describe("Landing page", function () {
     var path = "/";
     var page = "http://localhost:5000";
     var router = new Router();
-    var server = new Server(router.route);
+    var server = new Server(router.route, 5000);
     var landingPage = new LandingPage();
     router.addGet(path, landingPage.serveLandingPage);
 

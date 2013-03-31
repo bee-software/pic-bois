@@ -9,7 +9,7 @@ describe("public/goals.new.html", function () {
     var path = "/goals/new";
     var page = "http://localhost:5000" + path;
     var router = new Router();
-    var server = new Server(router.route);
+    var server = new Server(router.route, 5000);
     var goal = new Goal();
     router.addGet(path, goal.serveNewGoalPage);
     var browser = new Browser();
