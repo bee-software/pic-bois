@@ -1,6 +1,6 @@
 /*global describe, beforeEach, afterEach, it, expect */
 var Server = require("../src/server");
-var router = require("../src/router");
+var Router = require("../src/router");
 var request = require("request");
 
 describe("Router", function () {
@@ -8,6 +8,7 @@ describe("Router", function () {
     var method;
     var url;
     var data;
+    var router = new Router();
     var server = new Server(router.route);
 
     beforeEach(function () {

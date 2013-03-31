@@ -2,7 +2,7 @@
 var Browser = require("zombie");
 var Server = require("../src/server");
 var LandingPage = require("../src/landingPage");
-var router = require("../src/router");
+var Router = require("../src/router");
 
 
 describe("Landing page", function () {
@@ -11,6 +11,7 @@ describe("Landing page", function () {
 
     var path = "/";
     var page = "http://localhost:5000";
+    var router = new Router();
     var server = new Server(router.route);
     var landingPage = new LandingPage();
     router.addGet(path, landingPage.serveLandingPage);

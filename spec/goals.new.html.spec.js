@@ -2,12 +2,13 @@
 var Browser = require("zombie");
 var Server = require("../src/server");
 var Goal = require("../src/goal");
-var router = require("../src/router");
+var Router = require("../src/router");
 
 describe("public/goals.new.html", function () {
 
     var path = "/goals/new";
     var page = "http://localhost:5000" + path;
+    var router = new Router();
     var server = new Server(router.route);
     var goal = new Goal();
     router.addGet(path, goal.serveNewGoalPage);

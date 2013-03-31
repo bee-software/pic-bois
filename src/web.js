@@ -2,10 +2,11 @@
     "use strict";
 
     var Server = require("./server");
-    var router = require("./router");
+    var Router = require("./router");
     var Goal = require("./goal");
     var LandingPage = require("./landingPage");
 
+    var router = new Router();
     var server = new Server(router.route);
 
     exports.start = function () {
