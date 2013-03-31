@@ -6,10 +6,15 @@
     var Goal = require("./goal");
     var LandingPage = require("./landingPage");
 
-    var router = new Router();
-    var server = new Server(router.route, process.env.PORT || 5000);
+    var router = {};
+    var server = {};
 
-    exports.start = function () {
+    function Web(){
+        router = new Router();
+        server = new Server(router.route, process.env.PORT || 5000);
+    }
+
+    Web.prototype.start = function () {
         var goal = new Goal();
         var landingPage = new LandingPage();
 
@@ -20,13 +25,15 @@
         server.start();
     };
 
-    exports.stop = function (){
+    Web.prototype.stop = function (){
         server.stop();
     };
 
+    module.exports = Web;
 }());
 
 if (require.main === module) {
-    var web = require("./web");
+    var Web = require("./web");
+    var web = new Web();
     web.start();
 }
