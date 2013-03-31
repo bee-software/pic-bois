@@ -10,6 +10,7 @@
         return function render(scoredBy, assistedBy){
             var messageToken = "this message is awesome";
 
+            response.setHeader("content-type", "text/html");
             var template = fs.readFileSync("./pages/message.html");
             var html = template.toString()
                         .replace(messageToken,
