@@ -3,10 +3,10 @@
 
     var fs = require("fs");
 
-    function GoalCreationRenderer() {
+    function GoalCreatedRenderer() {
     }
 
-    GoalCreationRenderer.prototype.render = function(response) {
+    GoalCreatedRenderer.prototype.render = function(response) {
         return function render(scoredBy, assistedBy){
             var messageToken = "this message is awesome";
 
@@ -19,5 +19,5 @@
         };
     };
 
-    module.exports = GoalCreationRenderer;
+    module.exports = GoalCreatedRenderer;
 }());
