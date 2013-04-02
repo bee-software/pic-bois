@@ -4,7 +4,7 @@ var Server = require("../src/server");
 var Goal = require("../src/goal");
 var Router = require("../src/router");
 
-describe("public/goals.new.html", function () {
+describe("public/new_goal.html", function () {
 
     var path = "/goals/new";
     var page = "http://localhost:5000" + path;
