@@ -12,7 +12,7 @@
         var messageToken = "this message is awesome";
 
         response.setHeader("content-type", "text/html");
-        var template = fs.readFileSync("./pages/message.html");
+        var template = fs.readFileSync("./src/client/message.html");
         var html = template.toString()
             .replace(messageToken,
                 "saved: goal scored by player " + scoredBy + " and assisted by player " + assistedBy);

@@ -13,7 +13,7 @@
 
     Goal.prototype.serveNewGoalPage = function (request, response) {
         response.setHeader("content-type", "text/html");
-        response.write(fs.readFileSync("./pages/new_goal.html"));
+        response.write(fs.readFileSync("./src/client/new_goal.html"));
         response.end();
     };
 

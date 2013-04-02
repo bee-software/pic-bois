@@ -1,7 +1,7 @@
 /*global describe, beforeEach, afterEach, it, expect */
-var Server = require("../src/server");
-var Router = require("../src/router");
 var request = require("request");
+var Server = require("./server");
+var Router = require("./router");
 
 describe("Router", function () {
 

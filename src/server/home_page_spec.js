@@ -1,8 +1,8 @@
 /*global describe, beforeEach, afterEach, it, expect */
 var Browser = require("zombie");
-var Server = require("../src/server");
-var HomePage = require("../src/home_page");
-var Router = require("../src/router");
+var Server = require("./server");
+var HomePage = require("./home_page");
+var Router = require("./router");
 
 
 describe("Home page", function () {

@@ -1,4 +1,6 @@
 /*global describe, beforeEach, spyOn, it, expect */
+var GoalRenderer = require("./goal_created_renderer");
+
 describe("Goals creation renderer", function () {
 
     it("displays a goal created message with the goal information from the post", function (done) {
@@ -6,7 +8,6 @@ describe("Goals creation renderer", function () {
         spyOn(response, "setHeader");
         spyOn(response, "write");
 
-        var GoalRenderer = require("../src/goal_created_renderer");
         var renderer = new GoalRenderer(response);
 
         renderer.render(1,2);

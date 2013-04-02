@@ -24,7 +24,7 @@
     desc("Test jasmine");
     task("jasmine", function () {
         var jasminenode = require("./build/jasminenode_runner.js");
-        jasminenode.runTests("./spec", complete, fail);
+        jasminenode.runTests("./src/server", complete, fail);
     }, {async: true});
 
     desc("Test features");
@@ -36,7 +36,7 @@
     desc("Start application localy");
     task("start", function () {
         var spawn = require("child_process").spawn;
-        var node = spawn("./node_modules/.bin/forever", ["start", "src/web.js"]);
+        var node = spawn("./node_modules/.bin/forever", ["start", "src/server/web.js"]);
         node.stdout.on("data", logToConsole);
         node.stderr.on("data", logToConsole);
     });
@@ -44,7 +44,7 @@
     desc("Stop application localy");
     task("stop", function () {
         var spawn = require("child_process").spawn;
-        var node = spawn("./node_modules/.bin/forever", ["stop", "src/web.js"]);
+        var node = spawn("./node_modules/.bin/forever", ["stop", "src/server/web.js"]);
         node.stdout.on("data", logToConsole);
         node.stderr.on("data", logToConsole);
     });

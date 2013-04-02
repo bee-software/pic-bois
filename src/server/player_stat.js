@@ -26,7 +26,7 @@
         var goalToken = "GOALS";
         var assistsToken = "ASSISTS";
 
-        var template = fs.readFileSync("./pages/player.html");
+        var template = fs.readFileSync("./src/client/player.html");
         var html = template.toString().replace(goalToken, numberOfGoals).replace(assistsToken, numberOfAssists);
 
         response.setHeader("content-type", "text/html");

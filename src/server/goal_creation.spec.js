@@ -1,5 +1,5 @@
 /*global describe, beforeEach, it, spyOn, expect */
-var GoalCreation = require("../src/goal_creation");
+var GoalCreation = require("./goal_creation");
 
 describe("GoalCreation", function () {
 
