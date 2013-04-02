@@ -1,11 +1,11 @@
 /*global describe, beforeEach, afterEach, it, expect */
 var Browser = require("zombie");
 var Server = require("../src/server");
-var LandingPage = require("../src/landingPage");
+var HomePage = require("../src/home_page");
 var Router = require("../src/router");
 
 
-describe("Landing page", function () {
+describe("Home page", function () {
 
     var browser = new Browser();
 
@@ -13,8 +13,8 @@ describe("Landing page", function () {
     var page = "http://localhost:5000";
     var router = new Router();
     var server = new Server(router.route, 5000);
-    var landingPage = new LandingPage();
-    router.addGet(path, landingPage.serveLandingPage);
+    var homePage = new HomePage();
+    router.addGet(path, homePage.serve);
 
     beforeEach(function () {
         server.start();

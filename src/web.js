@@ -4,7 +4,8 @@
     var Server = require("./server");
     var Router = require("./router");
     var Goal = require("./goal");
-    var LandingPage = require("./landingPage");
+    var HomePage = require("./home_page");
+    var Player = require("./player_stat");
 
     var router = {};
     var server = {};
@@ -16,11 +17,13 @@
 
     Web.prototype.start = function () {
         var goal = new Goal();
-        var landingPage = new LandingPage();
+        var homePage = new HomePage();
+        var player = new Player();
 
         router.addGet("/goals/new", goal.serveNewGoalPage);
         router.addPost("/goals/create", goal.createGoalFromRequest);
-        router.addGet("/", landingPage.serveLandingPage);
+        router.addGet("/", homePage.serve);
+        router.addGet("/players/<id>", player.show);
 
         server.start();
     };

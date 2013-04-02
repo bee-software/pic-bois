@@ -7,7 +7,6 @@
     var GoalCreatedRender = require("./goal_created_renderer");
 
     var goalCreation = new GoalCreation();
-    var renderer = new GoalCreatedRender();
 
     function Goal() {
     }
@@ -28,7 +27,8 @@
 
         request.on("end", function () {
             var post = qs.parse(body);
-            goalCreation.execute(post, renderer.render(response));
+            var renderer = new GoalCreatedRender(response);
+            goalCreation.execute(post, renderer.render);
             response.end();
         });
     };
