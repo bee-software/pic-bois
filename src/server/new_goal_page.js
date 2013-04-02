@@ -8,16 +8,16 @@
 
     var goalCreation = new GoalCreation();
 
-    function Goal() {
+    function NewGoalPage() {
     }
 
-    Goal.prototype.serveNewGoalPage = function (request, response) {
+    NewGoalPage.prototype.serveNewGoalPage = function (request, response) {
         response.setHeader("content-type", "text/html");
         response.write(fs.readFileSync("./src/client/new_goal.html"));
         response.end();
     };
 
-    Goal.prototype.createGoalFromRequest = function(request, response) {
+    NewGoalPage.prototype.createGoalFromRequest = function(request, response) {
 
         var body = "";
 
@@ -33,5 +33,5 @@
         });
     };
 
-    module.exports = Goal;
+    module.exports = NewGoalPage;
 }());

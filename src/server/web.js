@@ -3,7 +3,7 @@
 
     var Server = require("./server");
     var Router = require("./router");
-    var Goal = require("./goal");
+    var Goal = require("./new_goal_page");
     var HomePage = require("./home_page");
     var Player = require("./player_stat");
 

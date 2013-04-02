@@ -1,25 +1,19 @@
 /*global describe, beforeEach, afterEach, it, expect */
 var Browser = require("zombie");
-var Server = require("./server");
-var Goal = require("./goal");
-var Router = require("./router");
+var WebApp = require("./web");
 
-describe("public/new_goal.html", function () {
+describe("New goal", function () {
 
-    var path = "/goals/new";
-    var page = "http://localhost:5000" + path;
-    var router = new Router();
-    var server = new Server(router.route, 5000);
-    var goal = new Goal();
-    router.addGet(path, goal.serveNewGoalPage);
+    var page = "http://localhost:5000/goals/new";
+    var webApp = new WebApp();
     var browser = new Browser();
 
     beforeEach(function () {
-        server.start();
+        webApp.start();
     });
 
     afterEach(function () {
-        server.stop();
+        webApp.stop();
     });
 
     describe("page's title", function () {
