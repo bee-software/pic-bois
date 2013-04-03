@@ -1,4 +1,4 @@
-(function() {
+(function () {
     "use strict";
 
     var fs = require("fs");
@@ -6,9 +6,8 @@
     var GoalCreation = require("./goal_creation");
     var GoalCreatedRender = require("./goal_created_renderer");
 
-    var goalCreation = new GoalCreation();
-
     function NewGoalPage() {
+        this.goalCreation = new GoalCreation();
     }
 
     NewGoalPage.prototype.serveNewGoalPage = function (request, response) {
@@ -17,7 +16,7 @@
         response.end();
     };
 
-    NewGoalPage.prototype.createGoalFromRequest = function(request, response) {
+    NewGoalPage.prototype.createGoalFromRequest = function (request, response) {
 
         var body = "";
 
@@ -28,9 +27,9 @@
         request.on("end", function () {
             var post = qs.parse(body);
             var renderer = new GoalCreatedRender(response);
-            goalCreation.execute(post, renderer.render);
+            this.goalCreation.execute(post, renderer.render.bind(renderer));
             response.end();
-        });
+        }.bind(this));
     };
 
     module.exports = NewGoalPage;

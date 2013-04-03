@@ -2,22 +2,22 @@
     "use strict";
 
     var fs = require("fs");
-    var response;
 
     function GoalCreatedRenderer(resp) {
-        response = resp;
+        this.response = resp;
     }
 
     GoalCreatedRenderer.prototype.render = function (scoredBy, assistedBy) {
-        var messageToken = "this message is awesome";
-
-        response.setHeader("content-type", "text/html");
-        var template = fs.readFileSync("./src/client/message.html");
-        var html = template.toString()
-            .replace(messageToken,
-                "saved: goal scored by player " + scoredBy + " and assisted by player " + assistedBy);
-        response.write(html);
+        this.response.setHeader("content-type", "text/html");
+        this.response.write(htmlMessage(scoredBy, assistedBy));
     };
+
+    function htmlMessage(scoredBy, assistedBy) {
+        var messageToken = "this message is awesome";
+        var template = fs.readFileSync("./src/client/message.html");
+        return template.toString().replace(messageToken,
+            "saved: goal scored by player " + scoredBy + " and assisted by player " + assistedBy);
+    }
 
     module.exports = GoalCreatedRenderer;
 }());
