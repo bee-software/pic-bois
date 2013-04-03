@@ -1,7 +1,7 @@
 [![build status](https://secure.travis-ci.org/les-epicuriens-du-logiciel/pic-bois.png)](http://travis-ci.org/les-epicuriens-du-logiciel/pic-bois)
 
 #requirements
-- Install node: http://nodejs.org/
+- Install node 0.8.x: http://nodejs.org/
 - Install make: on mac http://stackoverflow.com/questions/10265742/how-to-install-make-and-gcc-on-a-mac
 - Install Heroku Toolbelt: https://devcenter.heroku.com/articles/nodejs
 
