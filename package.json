@@ -1,22 +1,25 @@
 {
-  "name": "pic-bois",
-  "version": "0.0.1",
-  "dependencies": {
-    "forever" : "0.10.x",
-    "flask-router" : "0.0.x",
-    "querystring" : "0.2.x"
-  },
-  "devDependencies": {
-	"zombie" : "1.4.x",
-    "jasmine-node" : "1.4.x",
-	"request": "2.14.x",
-    "nodeunit": "0.7.x",
-    "jake" : "0.5.x",
-    "jshint" : "1.1.x"
-  },
+    "name": "pic-bois",
+    "version": "0.0.1",
+    "dependencies": {
+        "forever": "0.10.x",
+        "flask-router": "0.0.x",
+        "querystring": "0.2.x"
+    },
+    "devDependencies": {
+        "zombie": "1.4.x",
+        "jasmine-node": "1.4.x",
+        "request": "2.14.x",
+        "nodeunit": "0.7.x",
+        "jake": "0.5.x",
+        "jshint": "1.1.x"
+    },
 
-  "engines": {
-    "node": "0.8.x",
-    "npm": "1.1.x"
-  }
+    "engines": {
+        "node": "0.8.x",
+        "npm": "1.1.x"
+    },
+    "scripts": {
+        "test": "./jake integration"
+    }
 }
