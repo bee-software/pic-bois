@@ -13,6 +13,10 @@
         }
     });
 
+    desc("Integration server task");
+    task("integration", ["lint", "feature", "test"]);
+
+    desc("Unit tests");
     task("test", ["jasmine"]);
 
     desc("Test nodeunit");
