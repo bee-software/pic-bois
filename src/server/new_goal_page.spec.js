@@ -1,19 +1,19 @@
 /*global describe, beforeEach, afterEach, it, expect */
 var Browser = require("zombie");
-var WebApp = require("./web");
+var App = require("./application");
 
 describe("New goal", function () {
 
     var page = "http://localhost:5000/goals/new";
-    var webApp = new WebApp();
+    var app = new App();
     var browser = new Browser();
 
     beforeEach(function () {
-        webApp.start();
+        app.start();
     });
 
     afterEach(function () {
-        webApp.stop();
+        app.stop();
     });
 
     describe("page's title", function () {

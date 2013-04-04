@@ -1,20 +1,20 @@
 /*global describe, beforeEach, afterEach, it, expect */
 var Browser = require("zombie");
-var WebApp = require("./web");
+var App = require("./application");
 
 describe("Home page", function () {
 
     var browser = new Browser();
 
     var page = "http://localhost:5000";
-    var webApp = new WebApp();
+    var app = new App();
 
     beforeEach(function () {
-        webApp.start();
+        app.start();
     });
 
     afterEach(function () {
-        webApp.stop();
+        app.stop();
     });
 
     describe("page's title", function () {

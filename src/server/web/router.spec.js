@@ -5,8 +5,6 @@ var Router = require("./router");
 
 describe("Router", function () {
 
-    var method;
-    var url;
     var data;
     var router = new Router();
     var server = new Server(router.route.bind(router), 5000);
@@ -30,32 +28,21 @@ describe("Router", function () {
         router.addPost("/goal", mockCallback);
         request.post("http://localhost:5000/goal", {form: {key: "value"}}, function (error, response, body) {
             expect(response.statusCode).toEqual(200);
-            expect(method).toEqual("POST");
-            expect(url).toEqual("/goal");
-            expect(data).toEqual("key=value");
+            expect(data).toEqual({key: "value"});
             done();
         });
     });
 
     it("routes configured get method", function (done) {
-        router.addGet("/hello", mockCallback);
+        router.addGet("/hello", function(resquest, response){response.end();});
         request.get("http://localhost:5000/hello", function (error, response, body) {
             expect(response.statusCode).toEqual(200);
-            expect(method).toEqual("GET");
-            expect(url).toEqual("/hello");
             done();
         });
     });
 
-    function mockCallback(request, response) {
-        method = request.method;
-        url = request.url;
-
-        request.on("data", function (chunk) {
-            data = chunk.toString();
-        });
-
-        response.end();
+    function mockCallback(post, response) {
+        data = post;
     }
 
 });

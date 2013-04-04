@@ -1,18 +1,18 @@
 /*global describe, beforeEach, afterEach, it, expect */
 var Browser = require("zombie");
-var Webapp = require("../src/server/web");
+var App = require("../src/server/application");
 
 describe("submit goal", function () {
 
     var browser = new Browser();
-    var webapp = new Webapp();
+    var app = new App();
 
     beforeEach(function () {
-        webapp.start();
+        app.start();
     });
 
     afterEach(function () {
-        webapp.stop();
+        app.stop();
     });
 
     it("offers a way to submit a goal", function (done) {

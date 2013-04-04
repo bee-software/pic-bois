@@ -3,10 +3,10 @@
 
     var fs = require("fs");
 
-    function PlayerStat() {
+    function PlayerStatsPage() {
     }
 
-    PlayerStat.prototype.show = function (request, response) {
+    PlayerStatsPage.prototype.serve = function (request, response) {
 
         var numberOfGoals;
         var numberOfAssists;
@@ -34,9 +34,5 @@
         response.end();
     };
 
-    function numberOfGoalOfPlayer(player){
-        return fs.readFileSync("99.txt").toString();
-    }
-
-    module.exports = PlayerStat;
+    module.exports = PlayerStatsPage;
 }());

@@ -1,18 +1,18 @@
 /*global describe, beforeEach, afterEach, it, expect */
 var Browser = require("zombie");
-var Webapp = require("../src/server/web");
+var App = require("../src/server/application");
 
 describe("show player stat", function () {
 
     var browser = new Browser();
-    var webapp = new Webapp();
+    var app = new App();
 
     beforeEach(function () {
-        webapp.start();
+        app.start();
     });
 
     afterEach(function () {
-        webapp.stop();
+        app.stop();
     });
 
     it("displays a player's goals and assists", function (done) {
@@ -39,20 +39,4 @@ describe("show player stat", function () {
         });
     });
 
-//    it("of a player who just scored a goal", function (done) {
-//        browser.visit("http://localhost:5000/goals/new")
-//            .then(function() {
-//                browser.fill("#scoredBy", "99");
-//                browser.fill("#assistedBy", "66");
-//                browser.pressButton("#submit");
-//            })
-//            .then(function(){
-//                browser.visit("http://localhost:5000/players/99")
-//                    .then(function () {
-//                        expect(browser.text("#goals")).toEqual("1");
-//                        expect(browser.text("#assists")).toEqual("0");
-//                        done();
-//                    });
-//            });
-//    });
 });
