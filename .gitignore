@@ -1,7 +1,3 @@
 node_modules
 .DS_Store
-.python/
 .idea/
-*.pyc
-spec/test-folder
-
