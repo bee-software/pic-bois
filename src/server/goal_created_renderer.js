@@ -3,8 +3,8 @@
 
     var fs = require("fs");
 
-    function GoalCreatedRenderer(resp) {
-        this.response = resp;
+    function GoalCreatedRenderer(response) {
+        this.response = response;
     }
 
     GoalCreatedRenderer.prototype.render = function (scoredBy, assistedBy) {
