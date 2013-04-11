@@ -1,0 +1,6 @@
+nose
+pyhamcrest
+coverage
+pylint
+requests
+splinter

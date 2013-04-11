@@ -1,3 +1,11 @@
-.python/
+.DS_Store
+target/
+.tox/
 .idea/
 *.pyc
+*.egg/
+*.egg-info/
+.coverage
+node_modules/
+ghostdriver.log
+

@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-from flask.app import Flask
+from flask import Flask, render_template
 from gunicorn.app.base import Application
 from werkzeug.contrib.fixers import ProxyFix
 
@@ -12,18 +11,21 @@ class WSGIServer(Application):
         pass
 
     def load(self):
-        self.app = Flask("picbois")
+        self.app = Flask("picbois", static_folder="./www/static", template_folder="./www/static/templates")
         self._bootstrap_endpoints()
         self.app.wsgi_app = ProxyFix(self.app.wsgi_app)
         return self.app
 
     def _bootstrap_endpoints(self):
-        pass
-        #self._add_route('/clients/<client_id>/devices', function=self._get_client_devices, methods=["GET"])
-        #self._add_route('/devices/<device_id>', function=self._get_devices, methods=["GET"])
+        self._add_route(route='/', function=home, methods=["GET"])
 
     def _add_route(self, route, function, methods):
         self.app.add_url_rule(route, view_func=function, methods=methods)
+
+
+def home():
+    return render_template('home.html')
+
 
 def run():
     server = WSGIServer()

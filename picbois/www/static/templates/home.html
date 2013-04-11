@@ -1,0 +1,43 @@
+<html>
+	<head>
+		<title>DHHR - Dek Hockey Haut-Richelieu</title>
+        <script src="static/libs/jquery-1.9.1.js" type="text/javascript"></script>
+        <script src="static/libs/mustache.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <div id="main"><h1>Homepage</h1></div>
+        <div><a id="page1" href="#page1">Page 1</a></div>
+        <div><a id="page2" href="#page2">Page 2</a></div>
+    </body>
+
+    <script type="text/javascript">
+        var anchorRoutes = {
+            '#page1': 'page1.html',
+            '#page2': 'page2.html'
+        };
+
+        function loadPage(path) {
+            return function() {
+                $.get(path, function(content) {
+                    $("#main").html(content);
+                });
+            }
+        }
+
+        function loadAnchoredPage(a) {
+            var hash = $(this).attr('href');
+            if (!hash) {
+                hash = window.location.hash;
+            }
+
+            var page = anchorRoutes[hash];
+            if (page)
+                loadPage('static/templates/' + page)();
+        }
+
+        (function() {
+            loadAnchoredPage();
+            $("a").click(loadAnchoredPage);
+        })();
+    </script>
+</html>
