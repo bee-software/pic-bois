@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "phantomjs": ">= 1.9.0"
+  },
+  "engine": "node >= 0.10.3"
+}
