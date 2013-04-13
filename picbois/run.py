@@ -11,7 +11,10 @@ class WSGIServer(Application):
         pass
 
     def load(self):
-        self.app = Flask("picbois", static_folder="./www/static", template_folder="./www/static/templates")
+        self.app = Flask(import_name="picbois",
+                         static_folder="./picbois/www/static",
+                         template_folder="./picbois/www/static/templates")
+        self.app.debug = True
         self._bootstrap_endpoints()
         self.app.wsgi_app = ProxyFix(self.app.wsgi_app)
         return self.app
