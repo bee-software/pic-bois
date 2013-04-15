@@ -10,6 +10,17 @@ def setup():
         local('pip install -r requirements.txt --use-mirrors')
         local('pip install -r test-requires.txt --use-mirrors')
 
+
 def test():
     with prefix('. %s/bin/activate' % VIRTUALENV):
         local('python setup.py nosetests')
+
+
+def lint():
+    with prefix('. %s/bin/activate' % VIRTUALENV):
+        local('pylint features picbois')
+
+
+def start():
+    with prefix('. %s/bin/activate' % VIRTUALENV):
+        local('python picbois/run.py')
