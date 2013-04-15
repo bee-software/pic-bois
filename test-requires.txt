@@ -1,3 +1,4 @@
+fabric
 nose
 pyhamcrest
 coverage

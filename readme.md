@@ -1,12 +1,14 @@
 [![build status](https://secure.travis-ci.org/les-epicuriens-du-logiciel/pic-bois.png)](http://travis-ci.org/les-epicuriens-du-logiciel/pic-bois)
 
 #requirements
+- Install python 2.7
+- Install virtualenv: sudo pip install virtualenv
+- Install fabric: sudo pip install fabric
 - Install node : http://nodejs.org
 - Install phantomjs: npm install phantomjs
-- Install python 2.7
 
 #setup
-- tox
+- fab setup
 
 #to run the tests
-- nosetests
+- fab test

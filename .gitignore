@@ -1,6 +1,6 @@
 .DS_Store
 target/
-.tox/
+.py27/
 .idea/
 *.pyc
 *.egg/

@@ -3,5 +3,8 @@ python:
   - "2.7"
 install:
   - npm install phantomjs
-  - pip install tox
-script: tox
+  - pip install virtualenv
+  - pip install fabric
+script:
+  - fab setup
+  - fab test
