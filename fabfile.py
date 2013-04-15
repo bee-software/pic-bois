@@ -13,7 +13,7 @@ def setup():
 
 def test():
     with prefix('. %s/bin/activate' % VIRTUALENV):
-        local('python setup.py nosetests')
+        local('nosetests --with-coverage --cover-branches --cover-package=features,picbois')
 
 
 def lint():
