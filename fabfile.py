@@ -7,8 +7,8 @@ VIRTUALENV = '.py27'
 def setup():
     local('virtualenv --distribute --python=python2.7 %s' % VIRTUALENV)
     with prefix('. %s/bin/activate' % VIRTUALENV):
-        local('pip install -r requirements.txt')
-        local('pip install -r test-requires.txt')
+        local('pip install -r requirements.txt --use-mirrors')
+        local('pip install -r test-requires.txt --use-mirrors')
 
 
 def test():
