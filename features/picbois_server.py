@@ -26,9 +26,9 @@ class PicboisServer(object):
         os.getcwd()
         assert_that((self.ip, self.port), is_not(in_use()))
 
-        currentPythonInterpreter = sys.executable
+        current_python_interpreter = sys.executable
         self.proc = subprocess.Popen(
-            [currentPythonInterpreter, executable, '-w', str(workers), '-b', self.ip + ':' + str(self.port)])
+            [current_python_interpreter, executable, '-w', str(workers), '-b', self.ip + ':' + str(self.port)])
         self._wait_until_port_is_opened(self.port)
 
     def _run_and_wait(self, command, working_dir):
@@ -36,7 +36,7 @@ class PicboisServer(object):
         subprocess.check_call(command, cwd=working_dir, shell=True)
 
     def _wait_until_port_is_opened(self, port):
-        for i in range(0,10):
+        for i in range(0, 10):
             host = '127.0.0.1'
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             try:

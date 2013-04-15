@@ -13,12 +13,12 @@ def setup():
 
 def test():
     with prefix('. %s/bin/activate' % VIRTUALENV):
-        local('nosetests --with-coverage --cover-branches --cover-package=features,picbois')
+        local('nosetests')
 
 
 def lint():
     with prefix('. %s/bin/activate' % VIRTUALENV):
-        local('pylint features picbois')
+        local('pylint --rcfile=./build/pylintrc --reports=n features picbois')
 
 
 def start():

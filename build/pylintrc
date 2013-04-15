@@ -38,7 +38,34 @@ load-plugins=
 # --enable=similarities". If you want to run only the classes checker, but have
 # no Warning level messages displayed, use"--disable=all --enable=classes
 # --disable=W"
-#disable=
+
+# Brain-dead errors regarding standard language features
+#   W0142 = *args and **kwargs support
+#   W0403 = Relative imports
+
+# Pointless whinging
+#   R0201 = Method could be a function
+#   W0212 = Accessing protected attribute of client class
+#   W0613 = Unused argument
+#   W0232 = Class has no __init__ method
+#   R0903 = Too few public methods
+#   C0301 = Line too long
+#   R0913 = Too many arguments
+#   C0103 = Invalid name
+#   R0914 = Too many local variables
+#   W0401 = Wildcard import
+
+# PyLint's module importation is unreliable
+#   F0401 = Unable to import module
+#   W0402 = Uses of a deprecated module
+
+# Already an error when wildcard imports are used
+#   W0614 = Unused import from wildcard
+
+# Sometimes disabled depending on how bad a module is
+#   C0111 = Missing docstring
+
+disable=W0142,W0401,W0403,R0201,W0613,W0232,R0903,W0614,C0111,C0301,F0401
 
 
 [REPORTS]
@@ -49,7 +76,7 @@ load-plugins=
 output-format=text
 
 # Include message's id in output
-include-ids=no
+include-ids=yes
 
 # Include symbolic ids of messages in output
 symbols=no
@@ -92,19 +119,19 @@ const-rgx=(([A-Z_][A-Z0-9_]*)|(__.*__))$
 class-rgx=[A-Z_][a-zA-Z0-9]+$
 
 # Regular expression which should only match correct function names
-function-rgx=[a-z_][a-z0-9_]{2,30}$
+function-rgx=[a-z_][a-z0-9_]{2,50}$
 
 # Regular expression which should only match correct method names
-method-rgx=[a-z_][a-z0-9_]{2,30}$
+method-rgx=[a-z_][a-z0-9_]{2,50}$
 
 # Regular expression which should only match correct instance attribute names
-attr-rgx=[a-z_][a-z0-9_]{2,30}$
+attr-rgx=[a-z_][a-z0-9_]{2,50}$
 
 # Regular expression which should only match correct argument names
-argument-rgx=[a-z_][a-z0-9_]{2,30}$
+argument-rgx=[a-z_][a-z0-9_]{2,50}$
 
 # Regular expression which should only match correct variable names
-variable-rgx=[a-z_][a-z0-9_]{2,30}$
+variable-rgx=[a-z_][a-z0-9_]{1,50}$
 
 # Regular expression which should only match correct list comprehension /
 # generator expression variable names
@@ -124,7 +151,7 @@ no-docstring-rgx=__.*__
 [FORMAT]
 
 # Maximum number of characters on a single line.
-max-line-length=80
+max-line-length=110
 
 # Maximum number of lines in a module
 max-module-lines=1000
