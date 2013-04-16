@@ -1,4 +1,4 @@
-from picbois import app
+from picbois import APP as app
 from flask import render_template
 
 
