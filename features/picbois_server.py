@@ -4,7 +4,6 @@ import time
 
 from hamcrest import assert_that, is_not
 from hamcrest.core.base_matcher import BaseMatcher
-import pkg_resources
 
 
 class PicboisServer(object):

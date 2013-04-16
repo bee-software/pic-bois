@@ -29,9 +29,12 @@ def test():
         local('nosetests')
 
 @task
-def start():
+def start(debug=False):
     with prefix(_activate_virtual_env()):
-        local('python picbois/run.py')
+        if debug:
+            local('python run_debug.py')
+        else:
+            local('gunicorn picbois:app')
 
 
 def _activate_virtual_env():
