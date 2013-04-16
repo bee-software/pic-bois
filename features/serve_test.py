@@ -2,11 +2,12 @@ import inspect
 import unittest
 from features.picbois_server import PicboisServer
 from hamcrest import assert_that, is_
+from nose.tools import nottest
 from picbois.utils import get_current_file_dir
 import requests
 from splinter import Browser
 
-
+@nottest
 class ServeTest(unittest.TestCase):
     def test_serves_homepage(self):
         self._browser.visit('http://localhost:8000/')

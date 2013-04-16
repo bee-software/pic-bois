@@ -1,7 +1,7 @@
 import json
 import unittest
 from hamcrest import assert_that, equal_to
-from picbois import app
+from picbois import APP as app
 
 
 class NewGoalTest(unittest.TestCase):
