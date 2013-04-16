@@ -30,11 +30,11 @@
 
         function loadAnchoredPageOnClick(a) {
             var hash = $(this).attr('href');
-            loadPage('static/templates/' + getPageFilename(hash));
+            loadPage(getPageFilename(hash));
         }
 
         function loadUrlAnchoredPage() {
-            loadPage('static/templates/' + getPageFilename(window.location.hash));
+            loadPage(getPageFilename(window.location.hash));
         }
 
         (function() {
