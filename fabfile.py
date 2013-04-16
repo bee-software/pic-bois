@@ -34,7 +34,7 @@ def start(debug=False):
         if debug:
             local('python run_debug.py')
         else:
-            local('gunicorn picbois:app')
+            local('gunicorn picbois:APP')
 
 
 def _activate_virtual_env():

@@ -13,7 +13,7 @@ class PicboisServer(object):
         self.proc = None
 
     def start(self, workers=1):
-        self._start(flask_app='picbois:app', workers=workers)
+        self._start(flask_app='picbois:APP', workers=workers)
 
     def shutdown(self):
         self.proc.terminate()
