@@ -65,7 +65,10 @@ load-plugins=
 # Sometimes disabled depending on how bad a module is
 #   C0111 = Missing docstring
 
-disable=W0142,W0401,W0403,R0201,W0613,W0232,R0903,W0614,C0111,C0301,F0401
+# False positive on classes extending TestCase
+# R0904 = Too many public methods
+
+disable=W0142,W0401,W0403,R0201,W0613,W0232,R0903,W0614,C0111,C0301,F0401,R0904
 
 
 [REPORTS]
@@ -138,7 +141,7 @@ variable-rgx=[a-z_][a-z0-9_]{1,50}$
 inlinevar-rgx=[A-Za-z_][A-Za-z0-9_]*$
 
 # Good variable names which should always be accepted, separated by a comma
-good-names=i,j,k,ex,Run,_
+good-names=i,j,k,ex,Run,_,setUpClass,tearDownClass
 
 # Bad variable names which should always be refused, separated by a comma
 bad-names=foo,bar,baz,toto,tutu,tata
