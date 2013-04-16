@@ -29,6 +29,11 @@ def test():
         local('nosetests')
 
 @task
+def karma(*args):
+    print str(args)
+    local('./node_modules/.bin/karma %s' % args)
+
+@task
 def start(debug=False):
     with prefix(_activate_virtual_env()):
         if debug:

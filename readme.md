@@ -10,8 +10,12 @@
 #setup
 - fab setup
 
-#to run lint & tests
+#to run lint & feature tests
 - fab
 
-# to start the server
+#to run js tests
+- fab karma:start : once to start karma
+- fab karme:run : to run the tests
+
+# to run the server
 - fab start
