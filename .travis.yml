@@ -7,4 +7,4 @@ install:
   - pip install fabric
 script:
   - fab setup
-  - fab test
+  - fab
