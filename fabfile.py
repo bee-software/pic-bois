@@ -1,26 +1,42 @@
+import sys
 from fabric.context_managers import prefix
+from fabric.decorators import task
 from fabric.operations import local
 
 VIRTUALENV = '.py27'
 
+@task(default=True)
+def default():
+    lint()
+    test()
 
+
+@task
 def setup():
     local('virtualenv --distribute --python=python2.7 %s' % VIRTUALENV)
-    with prefix('. %s/bin/activate' % VIRTUALENV):
+    with prefix(_activate_virtual_env()):
         local('pip install -r requirements.txt --use-mirrors')
         local('pip install -r test-requires.txt --use-mirrors')
 
-
-def test():
-    with prefix('. %s/bin/activate' % VIRTUALENV):
-        local('nosetests')
-
-
+@task
 def lint():
-    with prefix('. %s/bin/activate' % VIRTUALENV):
+    with prefix(_activate_virtual_env()):
         local('pylint --rcfile=./build/pylintrc --reports=n features picbois')
 
+@task
+def test():
+    with prefix(_activate_virtual_env()):
+        local('nosetests')
 
+@task
 def start():
-    with prefix('. %s/bin/activate' % VIRTUALENV):
+    with prefix(_activate_virtual_env()):
         local('python picbois/run.py')
+
+
+def _activate_virtual_env():
+    if not hasattr(sys, 'real_prefix'):
+        return '. %s/bin/activate' % VIRTUALENV
+    else:
+        return 'true'
+

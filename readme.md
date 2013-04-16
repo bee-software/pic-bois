@@ -10,5 +10,8 @@
 #setup
 - fab setup
 
-#to run the tests
-- fab test
+#to run lint & tests
+- fab
+
+# to start the server
+- fab start
