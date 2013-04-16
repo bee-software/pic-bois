@@ -9,7 +9,7 @@ class SubmitGoal(unittest.TestCase):
         self.browser.visit("http://localhost:5000/#newgoal")
         self.browser.fill("scoredBy", "23")
         self.browser.fill("assistedBy", "10")
-        self.browser.find_by_id('submit').click()
+        self.browser.find_by_id('save').click()
 
         assert_that(self.browser.find_by_id("message").text,
                     equal_to("saved: goal scored by player 23 and assisted by player 10"))
