@@ -1,0 +1,14 @@
+<form id="newgoal">
+    <input id="scoredBy" name="scoredBy" />
+    <input id="assistedBy" name="assistedBy" />
+    <button id="submit">save!</button>
+</form>
+<label id="message"></label>
+
+<script>
+    $('#submit').on(function(){
+        $.post('/goals', $('#newgoal').serialize(), function(result){
+            $('#message').html(result.message)
+        }, 'json')
+    })
+</script>
