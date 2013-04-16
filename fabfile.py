@@ -30,7 +30,6 @@ def test():
 
 @task
 def karma(*args):
-    print str(args)
     local('./node_modules/.bin/karma %s' % args)
 
 @task
