@@ -37,7 +37,7 @@ def test():
 
 @task
 def karma(*args):
-    local('./node_modules/.bin/karma %s' % args)
+    local('./node_modules/.bin/karma %s build/karma.conf.js' % args)
 
 @task
 def start(bind='0.0.0.0', port='5000'):
