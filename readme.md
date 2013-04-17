@@ -10,7 +10,7 @@
 #setup
 - fab setup
 
-#to run lint & feature tests
+#to run pylint & python tests & feature tests
 - fab
 
 #to run js tests

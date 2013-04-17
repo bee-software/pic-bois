@@ -6,15 +6,15 @@ from splinter import Browser
 from picbois.utils import get_current_file_dir
 
 
-class SubmitGoal(unittest.TestCase):
-    def test_it_offers_a_way_to_submit_a_goal(self):
-        self.browser.visit("http://localhost:5000/#newgoal")
+class MarkGoal(unittest.TestCase):
+    def test_it_offers_a_way_to_mark_a_goal(self):
+        self.browser.visit("http://localhost:5000/#new_goal")
         self.browser.fill("scoredBy", "23")
         self.browser.fill("assistedBy", "10")
-        self.browser.find_by_id('saveGoal').click()
+        self.browser.find_by_id('markGoal').click()
 
         assert_that(self.browser.find_by_id("message").text,
-                    equal_to("saved: goal scored by player 23 and assisted by player 10"))
+                    equal_to("Marked: Goal scored by player 23 and assisted by player 10"))
 
 
     @classmethod

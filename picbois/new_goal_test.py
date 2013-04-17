@@ -9,4 +9,4 @@ class NewGoalTest(unittest.TestCase):
         webapp = app.test_client()
         result = webapp.post('/goals')
         assert_that(json.loads(result.data),
-                    equal_to({'message': "saved: goal scored by player 23 and assisted by player 10"}))
+                    equal_to({'message': "Marked: Goal scored by player 23 and assisted by player 10"}))
