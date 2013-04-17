@@ -1,9 +1,8 @@
-import inspect
 import unittest
+from features import phantomjs
 from hamcrest import assert_that, equal_to
 from picbois_server import PicboisServer
 from splinter import Browser
-from picbois.utils import get_current_file_dir
 
 
 class MarkGoal(unittest.TestCase):
@@ -28,9 +27,6 @@ class MarkGoal(unittest.TestCase):
         cls.server.shutdown()
         cls.browser.quit()
 
-
-def phantomjs():
-    return get_current_file_dir(inspect.currentframe()) + '/../node_modules/.bin/phantomjs'
 
 
         #

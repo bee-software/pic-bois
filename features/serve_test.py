@@ -1,9 +1,8 @@
-import inspect
 import unittest
+from features import phantomjs
 from features.picbois_server import PicboisServer
 from hamcrest import assert_that, is_
 from nose.tools import nottest
-from picbois.utils import get_current_file_dir
 import requests
 from splinter import Browser
 
@@ -45,7 +44,3 @@ class ServeTest(unittest.TestCase):
     def tearDownClass(cls):
         cls._server.shutdown()
         cls._browser.quit()
-
-
-def phantomjs():
-    return get_current_file_dir(inspect.currentframe()) + '/../node_modules/.bin/phantomjs'
