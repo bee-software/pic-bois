@@ -1,4 +1,3 @@
-import json
 import unittest
 from hamcrest import assert_that, equal_to
 from picbois import APP as app
@@ -27,7 +26,7 @@ class NewGoalTest(unittest.TestCase):
         result = webapp.post('/goals')
         assert_that(result.status_code, equal_to(400))
 
-    def test_creating_a_goal_with_anything_other_than_numbers_from_00_to_99_returns_a_400(self):
+    def test_creating_a_goal_with_data_other_than_numbers_from_00_to_99_returns_a_400(self):
         webapp = app.test_client()
         result = webapp.post('/goals', data=dict(
             scoredBy=23,
