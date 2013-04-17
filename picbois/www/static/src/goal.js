@@ -8,15 +8,27 @@ var goal = {};
     };
 
     goal.mark = function () {
-        $.post('/goals', _withGoalInformation(), function (result) {_displayMarkedGoalFrom(result);}, 'json');
+        $.ajax({
+            type: "POST",
+            url: "/goals",
+            data: _withGoalInformation(),
+            success: function(){ _displaySuccess(); },
+            error: function(){ _displayErrorMessage(); }
+//            dataType: "json",
+//            contentType: "application/json"
+        });
     };
 
     function _withGoalInformation() {
         return $('#goal').serialize();
     }
 
-    function _displayMarkedGoalFrom(result) {
-        $('#message').html(result.message)
+    function _displaySuccess() {
+        $('#message').html("Goal marked")
+    }
+
+    function _displayErrorMessage() {
+        $('#message').html("Goal not marked")
     }
 
 }());

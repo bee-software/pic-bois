@@ -19,20 +19,33 @@ describe("Mark goal page", function () {
         goal.mark();
 
         var recentCall = $.ajax.mostRecentCall.args[0];
-        expect(recentCall).toEqualCall({'url': "/goals", 'type': "post", 'data': "scoredBy=23&assistedBy=11"})
+        expect(recentCall).toEqualCall({'url': "/goals", 'type': "POST", 'data': "scoredBy=23&assistedBy=11"})
     });
 
-    it("displays the returned message", function () {
+    it("displays success on 201", function () {
         setFixtures('<label id="message"></label>');
 
         spyOn($, "ajax").andCallFake(function (params) {
-            params.success({'message': "ALLO"});
+            params.success();
         });
 
         goal.mark();
 
-        expect($('#message').html()).toEqual("ALLO")
+        expect($('#message').html()).toEqual("Goal marked")
     });
+
+    it("displays error on 400", function () {
+        setFixtures('<label id="message"></label>');
+
+        spyOn($, "ajax").andCallFake(function (params) {
+            params.error();
+        });
+
+        goal.mark();
+
+        expect($('#message').html()).toEqual("Goal not marked")
+    });
+
 
     function toEqualCall(expected) {
         var actual = this.actual;

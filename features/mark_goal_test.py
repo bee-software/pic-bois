@@ -12,8 +12,7 @@ class MarkGoal(unittest.TestCase):
         self.browser.fill("assistedBy", "10")
         self.browser.find_by_id('markGoal').click()
 
-        assert_that(self.browser.find_by_id("message").text,
-                    equal_to("Marked: Goal scored by player 23 and assisted by player 10"))
+        assert_that(self.browser.find_by_id("message").text, equal_to("Goal marked"))
 
 
     @classmethod
