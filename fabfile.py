@@ -34,7 +34,17 @@ def karma(*args):
     local('./node_modules/.bin/karma %s' % args)
 
 @task
-def start(debug=False):
+def start(bind='0.0.0.0', port='5000'):
+    with prefix(_activate_virtual_env()):
+        local('python simple_daemon.py start {host} {port}'.format(host=bind, port=port))
+
+@task
+def stop():
+    with prefix(_activate_virtual_env()):
+        local('python simple_daemon.py stop')
+
+@task
+def run(debug=False):
     with prefix(_activate_virtual_env()):
         if debug:
             local('python run_debug.py')
