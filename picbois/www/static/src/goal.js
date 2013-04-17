@@ -16,7 +16,6 @@ var goal = {};
     }
 
     function _displayMarkedGoalFrom(result) {
-        console.log(JSON.stringify(result));
         $('#message').html(result.message)
     }
 

@@ -18,14 +18,15 @@ describe("Mark goal page", function () {
         expect(recentCall["data"]).toEqual("scoredBy=23&assistedBy=11");
     });
 
-//    it("displays the goal message on return", function () {
-//        spyOn($, "ajax").andCallFake(function(){
-//            console.log("CALLED");
-//            return "YEAH";
-//        });
-//        goal.mark();
-//        var $message = $('#message');
-//        console.log("MESSAGE" + JSON.stringify($message));
-//        expect($message.text()).toEqual("ad")
-//    });
+    it("displays the returned message", function () {
+        setFixtures('<label id="message"></label>');
+
+        spyOn($, "ajax").andCallFake(function(params) {
+            params.success({'message' : "ALLO"});
+            });
+
+        goal.mark();
+
+        expect($('#message').html()).toEqual("ALLO")
+    });
 });
