@@ -3,12 +3,21 @@ var goal = {};
 (function () {
     "use strict";
 
-    goal.mark = function () {
-        $.post('/goals', $('#goal').serialize(), function (result) {
-            $('#message').html(result.message)
-        }, 'json');
+    goal.addClickEventCallback = function() {
+        $('#markGoal').on('click', goal.mark);
     };
 
-    $('#markGoal').on('click', goal.mark);
+    goal.mark = function () {
+        $.post('/goals', _withGoalInformation(), function (result) {_displayMarkedGoalFrom(result);}, 'json');
+    };
+
+    function _withGoalInformation() {
+        return $('#goal').serialize();
+    }
+
+    function _displayMarkedGoalFrom(result) {
+        console.log(JSON.stringify(result));
+        $('#message').html(result.message)
+    }
 
 }());
