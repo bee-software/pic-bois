@@ -10,10 +10,9 @@ def default():
     lint()
     test()
 
-
 @task
 def setup():
-    local('virtualenv --distribute --python=python2.7 {env}'.format(VIRTUALENV))
+    local('virtualenv --distribute --python=python2.7 {env}'.format(env=VIRTUALENV))
     install_requirements()
 
 @task
