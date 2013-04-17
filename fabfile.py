@@ -22,6 +22,10 @@ def install_requirements():
         local('pip install -r test-requires.txt --use-mirrors')
 
 @task
+def deploy():
+    local('git push heroku python:master')
+
+@task
 def lint():
     with prefix(_activate_virtual_env()):
         local('pylint --rcfile=./build/pylintrc --reports=n features picbois')
