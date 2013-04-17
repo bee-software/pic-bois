@@ -13,7 +13,11 @@ def default():
 
 @task
 def setup():
-    local('virtualenv --distribute --python=python2.7 %s' % VIRTUALENV)
+    local('virtualenv --distribute --python=python2.7 {env}'.format(VIRTUALENV))
+    install_requirements()
+
+@task
+def install_requirements():
     with prefix(_activate_virtual_env()):
         local('pip install -r requirements.txt --use-mirrors')
         local('pip install -r test-requires.txt --use-mirrors')
@@ -53,7 +57,7 @@ def run(debug=False):
 
 def _activate_virtual_env():
     if not hasattr(sys, 'real_prefix'):
-        return '. %s/bin/activate' % VIRTUALENV
+        return '. {env}/bin/activate'.format(env=VIRTUALENV)
     else:
         return 'true'
 
