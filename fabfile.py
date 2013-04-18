@@ -8,7 +8,8 @@ VIRTUALENV = '.py27'
 @task(default=True)
 def default():
     lint()
-    test()
+    test_py()
+    test_js()
 
 @task
 def setup():
@@ -31,9 +32,13 @@ def lint():
         local('pylint --rcfile=./build/pylintrc --reports=n features picbois')
 
 @task
-def test():
+def test_py():
     with prefix(_activate_virtual_env()):
         local('nosetests')
+
+@task
+def test_js():
+    local('PHANTOMJS_BIN=./node_modules/.bin/phantomjs ./node_modules/.bin/karma start --single-run --browsers PhantomJS build/karma.conf.js')
 
 @task
 def karma(*args):
