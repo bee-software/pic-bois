@@ -8,18 +8,13 @@ from picbois import APP as app
 class NewGoalTest(unittest.TestCase):
     def test_creating_a_goal_returns_a_success_response(self):
         webapp = app.test_client()
-        result = webapp.post('/goals', data=dict(
-            scoredBy=23,
-            assistedBy=11
-        ))
+        result = webapp.post('/goals', data=json_of(scoredBy="23", assistedBy="11"), content_type='application/json')
         assert_that(result, equal_to_response(201, {'success': True}))
 
 
     def test_creating_an_unassisted_goal_returns_success_response(self):
         webapp = app.test_client()
-        result = webapp.post('/goals', data=dict(
-            scoredBy=23
-        ))
+        result = webapp.post('/goals', data=json_of(scoredBy="23"), content_type='application/json')
         assert_that(result, equal_to_response(201, {'success': True}))
 
 
@@ -30,10 +25,7 @@ class NewGoalTest(unittest.TestCase):
 
     def test_creating_a_goal_with_data_other_than_numbers_from_00_to_99_returns_a_400(self):
         webapp = app.test_client()
-        result = webapp.post('/goals', data=dict(
-            scoredBy=23,
-            assistedBy="sada"
-        ))
+        result = webapp.post('/goals', data=json_of(scoredBy="23", assistedBy="sada"), content_type='application/json')
         assert_that(result.status_code, equal_to(400))
 
 class EqualToResponse(BaseMatcher):
@@ -55,3 +47,6 @@ class EqualToResponse(BaseMatcher):
 
 def equal_to_response(status, data):
     return EqualToResponse(status, data)
+
+def json_of(**kwargs):
+    return json.dumps(dict(**kwargs))

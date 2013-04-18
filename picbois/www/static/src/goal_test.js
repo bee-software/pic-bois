@@ -19,8 +19,8 @@ describe("Mark goal page", function () {
         goal.mark();
 
         var recentCall = $.ajax.mostRecentCall.args[0];
-        expect(recentCall).toEqualCall({'url': "/goals", 'type': "POST",
-            'data': "scoredBy=23&assistedBy=11", 'dataType': "json"})
+        expect(recentCall).toEqualCall({url: "/goals", type: "POST", data: {assistedBy: "11", scoredBy: "23"},
+                                           contentType: "application/json" })
     });
 
     it("displays success on 201", function () {
@@ -52,17 +52,38 @@ describe("Mark goal page", function () {
         var actual = this.actual;
 
         this.message = function () {
-            return "Expected " + actual["type"] + " on " + actual["url"] + " with data " + actual["data"] +
-                " with a response in " + actual["dataType"] +
-                "\n   to be " + expected["type"] + " on " + expected["url"] + " with data " + expected["data"] +
-                " with a response in " + expected["dataType"];
+            return "Expected " + actual.type + " on " + actual.url + " with data " + actual.data +
+                " with a content type of " + actual.contentType +
+                "\n   to be " + expected.type + " on " + expected.url + " with data " + JSON.stringify(expected.data) +
+                " with content type of " + expected.contentType;
         };
 
-        return actual["url"] === expected["url"] &&
-            actual["type"] === expected["type"] &&
-            actual["data"] === expected["data"] &&
-            actual["dataType"] === expected["dataType"];
+        return actual.url === expected.url &&
+            actual.type === expected.type &&
+            javascriptObjectsEqual(JSON.parse(actual.data), expected.data) &&
+            actual.contentType === expected.contentType;
 
+    }
+
+    function javascriptObjectsEqual(a, b) {
+
+        function sort(object) {
+            if (Array.isArray(object)) {
+                return object.sort();
+            }
+            else if (typeof object !== "object" || object === null) {
+                return object;
+            }
+
+            return Object.keys(object).sort().map(function(key) {
+                return {
+                    key: key,
+                    value: sort(object[key])
+                };
+            });
+        }
+
+        return JSON.stringify(sort(a)) === JSON.stringify(sort(b));
     }
 
 });
