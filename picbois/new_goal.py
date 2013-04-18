@@ -1,5 +1,5 @@
 import re
-from flask import request, abort
+from flask import request, abort, make_response, jsonify
 from picbois import APP as app
 
 VALID_PLAYER_NUMBER = re.compile("[0-9][0-9]")
@@ -13,7 +13,8 @@ def goals():
     if assisted_by and not VALID_PLAYER_NUMBER.match(assisted_by):
         abort(400)
 
-    return "{}", 201
+    return make_response(jsonify({'success': True}), 201)
+
 
 def extract_player_numbers_from(form):
     scored_by, assisted_by = None, None
