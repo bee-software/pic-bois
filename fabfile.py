@@ -13,6 +13,7 @@ def default():
 
 @task
 def setup():
+    local('npm install')
     local('virtualenv --distribute --python=python2.7 {env}'.format(env=VIRTUALENV))
     install_requirements()
 

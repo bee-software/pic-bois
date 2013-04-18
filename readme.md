@@ -1,21 +1,20 @@
 [![build status](https://secure.travis-ci.org/les-epicuriens-du-logiciel/pic-bois.png)](http://travis-ci.org/les-epicuriens-du-logiciel/pic-bois)
 
 #requirements
-- Install python 2.7
-- Install virtualenv: sudo pip install virtualenv
-- Install fabric: sudo pip install fabric
-- Install node : http://nodejs.org
-- Install phantomjs: npm install phantomjs
+- python 2.7
+- virtualenv: sudo pip install virtualenv
+- fabric: sudo pip install fabric
+- node : http://nodejs.org
 
 #setup
 - fab setup
 
-#to run pylint & python tests & feature tests & javascript tests
+#to run feature tests & pylint & python tests & javascript tests
 - fab
 
-#to run js tests
+#to run js tests for development
 - fab karma:start : once to start karma
-- fab karme:run : to run the tests
+- fab karma:run : to run the tests
 
 # to run the server
 - fab start
