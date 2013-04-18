@@ -43,7 +43,7 @@ def test_js():
 
 @task
 def karma(*args):
-    local('./node_modules/.bin/karma %s build/karma.conf.js' % args)
+    local('./node_modules/.bin/karma {command} build/karma.conf.js'.format(command=args[0]))
 
 @task
 def start(bind='0.0.0.0', port='5000'):
