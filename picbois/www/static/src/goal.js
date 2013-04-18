@@ -13,8 +13,8 @@ var goal = {};
             url: "/goals",
             data: _withGoalInformation(),
             success: function(){ _displaySuccess(); },
-            error: function(){ _displayErrorMessage(); }
-//            dataType: "json",
+            error: function(){ _displayErrorMessage(); },
+            dataType: "json"
 //            contentType: "application/json"
         });
     };

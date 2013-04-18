@@ -13,7 +13,7 @@ def goals():
     if assisted_by and not VALID_PLAYER_NUMBER.match(assisted_by):
         abort(400)
 
-    return "", 201
+    return "{}", 201
 
 def extract_player_numbers_from(form):
     scored_by, assisted_by = None, None
