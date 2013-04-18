@@ -19,7 +19,8 @@ describe("Mark goal page", function () {
         goal.mark();
 
         var recentCall = $.ajax.mostRecentCall.args[0];
-        expect(recentCall).toEqualCall({'url': "/goals", 'type': "POST", 'data': "scoredBy=23&assistedBy=11"})
+        expect(recentCall).toEqualCall({'url': "/goals", 'type': "POST",
+            'data': "scoredBy=23&assistedBy=11", 'dataType': "json"})
     });
 
     it("displays success on 201", function () {
@@ -51,13 +52,14 @@ describe("Mark goal page", function () {
         var actual = this.actual;
 
         this.message = function () {
-            return "Expected " + actual["type"] + " on " + actual["url"] + " with data " + actual["data"] +
-                "\n to be " + expected["type"] + " on " + expected["url"] + " with data " + expected["data"];
+            return "Expected " + actual["type"] + " on " + actual["url"] + " with data " + actual["data"] + actual["dataType"] +
+                "\n to be " + expected["type"] + " on " + expected["url"] + " with data " + expected["data" + expected["dataType"]];
         };
 
         return actual["url"] === expected["url"] &&
             actual["type"] === expected["type"] &&
-            actual["data"] === expected["data"];
+            actual["data"] === expected["data"] &&
+            actual["dataType"] === expected["dataType"];
 
     }
 
