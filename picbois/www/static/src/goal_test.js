@@ -52,8 +52,10 @@ describe("Mark goal page", function () {
         var actual = this.actual;
 
         this.message = function () {
-            return "Expected " + actual["type"] + " on " + actual["url"] + " with data " + actual["data"] + actual["dataType"] +
-                "\n to be " + expected["type"] + " on " + expected["url"] + " with data " + expected["data" + expected["dataType"]];
+            return "Expected " + actual["type"] + " on " + actual["url"] + " with data " + actual["data"] +
+                " with a response in " + actual["dataType"] +
+                "\n   to be " + expected["type"] + " on " + expected["url"] + " with data " + expected["data"] +
+                " with a response in " + expected["dataType"];
         };
 
         return actual["url"] === expected["url"] &&
