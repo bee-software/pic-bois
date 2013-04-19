@@ -3,7 +3,7 @@
 describe("Single page navigation", function(){
 
     beforeEach(function(){
-        setFixtures('<div id="main"/>');
+        setFixtures('<div id="main"/><div id="links"/>');
     });
 
     it("contains an empty div as the main area", function(){
@@ -13,18 +13,29 @@ describe("Single page navigation", function(){
     it("loads the home page content in the main area on load", function(){
         spyOn($, "ajax").andCallFake(function (params) {params.success("Home page content");});
 
-        var singlePage = new dhhr.SinglePage({});
-        singlePage.onLoad();
+        singlePage.initialize();
 
         expect($.ajax.mostRecentCall.args[0].url).toBe('home.html');
         expect($('#main').html()).toEqual("Home page content");
+    });
+
+    it("contains an empty div as the links area", function(){
+        expect($('#links').is('div')).toBeTruthy();
+    });
+
+    it("offers a way to add a link to the links area", function(){
+        singlePage.addLink("AnchoredPage", 'anchoredPage.html');
+        var link = $('#links').find('> #AnchoredPage');
+        expect(link).toExist();
+        expect(link.attr('href')).toEqual("#AnchoredPage");
+
     });
 
     it("loads the html page in the main area associated with the window.location.hash", function(){
         spyOn($, "ajax").andCallFake(function (params) {params.success("Anchored page content");});
 
         window.location.hash = "#AnchoredPage";
-        var singlePage = new dhhr.SinglePage({'#AnchoredPage': 'anchoredPage.html'});
+        singlePage.addLink('AnchoredPage', 'anchoredPage.html');
         singlePage.loadAnchoredPage();
 
         expect($.ajax.mostRecentCall.args[0].url).toBe('anchoredPage.html');
@@ -35,7 +46,7 @@ describe("Single page navigation", function(){
         spyOn($, "ajax").andCallFake(function (params) {params.success("Home page content");});
 
         window.location.hash = "#MalformedAnchoredPage";
-        var singlePage = new dhhr.SinglePage({'#AnchoredPage': 'anchoredPage.html'});
+        singlePage.addLink('AnchoredPage', 'anchoredPage.html');
         singlePage.loadAnchoredPage();
 
         expect($.ajax.mostRecentCall.args[0].url).toBe('home.html');
