@@ -12,6 +12,3 @@ def get_current_file_dir(currentframe):
 
 def get_current_file_path(currentframe):
     return os.path.abspath(inspect.getfile(currentframe))
-
-
-
