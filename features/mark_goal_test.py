@@ -1,7 +1,7 @@
 import unittest
 from features import phantomjs
 from hamcrest import assert_that, equal_to
-from picbois_server import PicboisServer
+from drivers.picbois_server import PicboisServer
 from splinter import Browser
 
 
