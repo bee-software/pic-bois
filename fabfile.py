@@ -33,6 +33,10 @@ def lint():
         local('pylint --rcfile=./build/pylintrc --reports=n features picbois')
 
 @task
+def clean():
+    local('./build/clean.sh')
+
+@task
 def test_py():
     with prefix(_activate_virtual_env()):
         local('nosetests')
