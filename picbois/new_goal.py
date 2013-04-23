@@ -3,7 +3,7 @@ import re
 from flask import request, abort, make_response, jsonify
 from picbois import APP as app
 
-VALID_PLAYER_NUMBER = re.compile("[0-9][0-9]")
+VALID_PLAYER_NUMBER = re.compile(r"\d{1,2}$")
 
 @app.route('/goals', methods=['POST'])
 def goals():

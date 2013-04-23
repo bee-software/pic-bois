@@ -28,8 +28,30 @@ class NewGoalTest(unittest.TestCase):
         result = webapp.post('/goals', data=json_of(scoredBy="23", assistedBy="sada"), content_type='application/json')
         assert_that(result.status_code, equal_to(400))
 
-class EqualToResponse(BaseMatcher):
 
+    def test_success_response_on_all_valid_player_numbers(self):
+        webapp = app.test_client()
+        valid_player_numbers = all_valid_player_numbers()
+
+        for number in valid_player_numbers:
+            result = webapp.post('/goals', data=json_of(scoredBy=number, assistedBy=number),
+                                 content_type='application/json')
+            assert_that(result, equal_to_response(201, {'success': True}), 'Failed with number ' + number)
+
+    def test_failed_response_on_invalid_player_numbers(self):
+        webapp = app.test_client()
+
+        result = webapp.post('/goals', data=json_of(scoredBy="0a", assistedBy="12aa"), content_type='application/json')
+        assert_that(result.status_code, equal_to(400))
+
+        result = webapp.post('/goals', data=json_of(scoredBy="a0", assistedBy="a12"), content_type='application/json')
+        assert_that(result.status_code, equal_to(400))
+
+        result = webapp.post('/goals', data=json_of(scoredBy="a0a", assistedBy="a12a"), content_type='application/json')
+        assert_that(result.status_code, equal_to(400))
+
+
+class EqualToResponse(BaseMatcher):
     def __init__(self, status, data):
         self.status = status
         self.data = data
@@ -45,8 +67,16 @@ class EqualToResponse(BaseMatcher):
     def describe_mismatch(self, result, mismatch_description):
         mismatch_description.append_text("was result " + str(result.status_code) + " : " + result.data)
 
+
+def all_valid_player_numbers():
+    numbers = [str(num).zfill(2) for num in range(0, 10)]
+    numbers += [str(num) for num in range(0, 100)]
+    return numbers
+
+
 def equal_to_response(status, data):
     return EqualToResponse(status, data)
+
 
 def json_of(**kwargs):
     return json.dumps(dict(**kwargs))
