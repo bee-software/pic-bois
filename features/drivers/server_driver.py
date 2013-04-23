@@ -6,26 +6,24 @@ from hamcrest import assert_that, is_not
 from hamcrest.core.base_matcher import BaseMatcher
 
 
-class PicboisServer(object):
-    def __init__(self, port=8000, ip_address='0.0.0.0'):
+class ServerDriver(object):
+    def __init__(self, name, port=8000, ip_address='0.0.0.0'):
+        self.name = name
         self.port = port
         self.ip_address = ip_address
         self.proc = None
 
-    def start(self, workers=1):
-        self._start(flask_app='picbois:APP', workers=workers)
+    def start(self, cmd, **kwargs):
+        assert_that((self.ip_address, self.port), is_not(in_use()))
+
+        self.proc = subprocess.Popen(cmd, **kwargs)
+        self._wait_until_port_is_opened(self.port)
 
     def shutdown(self):
         self.proc.terminate()
-        print "========== Begin Picbois Server Output =========="
+        print "========== Begin {server_name} server Output ==========".format(server_name=self.name)
         print self.proc.communicate()[0]
-        print "=========== End Picbois Server Output ==========="
-
-    def _start(self, flask_app, workers):
-        assert_that((self.ip_address, self.port), is_not(in_use()))
-
-        self.proc = subprocess.Popen(['gunicorn', flask_app, '-w', str(workers), '-b', self.ip_address + ':' + str(self.port)])
-        self._wait_until_port_is_opened(self.port)
+        print "=========== End {server_name} Output ===========".format(server_name=self.name)
 
     def _run_and_wait(self, command, working_dir):
         print 'waiting for <' + command + '> in ' + working_dir

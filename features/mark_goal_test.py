@@ -1,9 +1,10 @@
 import unittest
 from features import phantomjs
 from hamcrest import assert_that, equal_to
-from drivers.picbois_server import PicboisServer
+from drivers.server_driver import ServerDriver
 from splinter import Browser
 
+PICBOIS_COMMAND = ['gunicorn', 'picbois:APP', '-w', '1', '-b', '0.0.0.0:8000']
 
 class MarkGoal(unittest.TestCase):
     def test_it_offers_a_way_to_mark_a_goal(self):
@@ -17,8 +18,8 @@ class MarkGoal(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.server = PicboisServer(port=8000)
-        cls.server.start()
+        cls.server = ServerDriver(name='Picbois', port=8000)
+        cls.server.start(cmd=PICBOIS_COMMAND)
         cls.browser = Browser(driver_name='phantomjs', executable_path=phantomjs())
 
     @classmethod
