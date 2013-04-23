@@ -10,7 +10,13 @@ basePath = '../';
 files = [
   JASMINE,
   JASMINE_ADAPTER,
-  'picbois/www/static/**/*.js'
+  'picbois/www/static/**/*.js',
+  {
+    pattern: 'picbois/www/templates/**/*.html',
+    watched: true,
+    included: false,
+    served: true
+  }
 ];
 
 

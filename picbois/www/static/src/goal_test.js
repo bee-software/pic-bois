@@ -6,13 +6,13 @@ describe("Mark goal page", function () {
         this.addMatchers({
             toEqualCall: toEqualCall
         });
+        jasmine.getFixtures().fixturesPath = '/base/picbois/www/templates';
     });
 
     it("posts the goals information on submit", function () {
-        setFixtures('<form id="goal">' +
-            '<input id="scoredBy" name="scoredBy" value="23">' +
-            '<input id="assistedBy" name="assistedBy" value="11"/>' +
-            '</form>');
+        loadFixtures('new_goal.html');
+        $('#scoredBy').val('23');
+        $('#assistedBy').val('11');
 
         spyOn($, "ajax");
 
@@ -24,7 +24,7 @@ describe("Mark goal page", function () {
     });
 
     it("displays success on 201", function () {
-        setFixtures('<label id="message"></label>');
+        loadFixtures('new_goal.html');
 
         spyOn($, "ajax").andCallFake(function (params) {
             params.success();
@@ -36,7 +36,7 @@ describe("Mark goal page", function () {
     });
 
     it("displays error on 400", function () {
-        setFixtures('<label id="message"></label>');
+        loadFixtures('new_goal.html');
 
         spyOn($, "ajax").andCallFake(function (params) {
             params.error();
