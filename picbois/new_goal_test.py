@@ -1,4 +1,5 @@
 import json
+import types
 import unittest
 from hamcrest import assert_that, equal_to
 from hamcrest.core.base_matcher import BaseMatcher
@@ -50,6 +51,18 @@ class NewGoalTest(unittest.TestCase):
         result = webapp.post('/goals', data=json_of(scoredBy="a0a", assistedBy="a12a"), content_type='application/json')
         assert_that(result.status_code, equal_to(400))
 
+    def test_server_supports_client_from_other_domains(self):
+        webapp = app.test_client()
+        patch_with_options(webapp)
+
+        # pylint: disable=E1101
+        result = webapp.options('/goals', headers=dict(origin='http://remotesite.com'))
+        assert_that(result.status_code, equal_to(204))
+        assert_that('Access-Control-Allow-Origin' in result.headers)
+        assert_that(result.headers['Access-Control-Allow-Origin'] == 'http://remotesite.com')
+        assert_that('Access-Control-Allow-Methods' in result.headers)
+        assert_that('Access-Control-Allow-Headers' in result.headers)
+
 
 class EqualToResponse(BaseMatcher):
     def __init__(self, status, data):
@@ -80,3 +93,11 @@ def equal_to_response(status, data):
 
 def json_of(**kwargs):
     return json.dumps(dict(**kwargs))
+
+def patch_with_options(target):
+    def options(target, *args, **kw):
+        """Like open but method is enforced to OPTIONS."""
+        kw['method'] = 'OPTIONS'
+        return target.open(*args, **kw)
+    target.options = types.MethodType(options, target)
+

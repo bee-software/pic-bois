@@ -6,7 +6,7 @@ describe("Mark goal page", function () {
         this.addMatchers({
             toEqualCall: toEqualCall
         });
-        jasmine.getFixtures().fixturesPath = '/base/picbois/www/templates';
+        jasmine.getFixtures().fixturesPath = '/base/client';
     });
 
     it("posts the goals information on submit", function () {
@@ -19,7 +19,7 @@ describe("Mark goal page", function () {
         goal.mark();
 
         var recentCall = $.ajax.mostRecentCall.args[0];
-        expect(recentCall).toEqualCall({url: "/goals", type: "POST", data: {assistedBy: "11", scoredBy: "23"},
+        expect(recentCall).toEqualCall({url: "http://localhost:8000/goals", type: "POST", data: {assistedBy: "11", scoredBy: "23"},
                                            contentType: "application/json" })
     });
 

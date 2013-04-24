@@ -10,7 +10,7 @@ var goal = {};
     goal.mark = function () {
         $.ajax({
             type: "POST",
-            url: "/goals",
+            url: "http://localhost:8000/goals",
             data: _withGoalInformation(),
             success: function(){ _displaySuccess(); },
             error: function(){ _displayErrorMessage(); },

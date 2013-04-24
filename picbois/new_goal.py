@@ -5,8 +5,20 @@ from picbois import APP as app
 
 VALID_PLAYER_NUMBER = re.compile(r"\d{1,2}$")
 
-@app.route('/goals', methods=['POST'])
+
+def options():
+    response = make_response('', 204)
+    response.headers['Access-Control-Allow-Origin'] = request.headers['Origin'] if 'Origin' in request.headers else '*'
+    response.headers['Access-Control-Allow-Methods'] = 'POST OPTIONS'
+    response.headers['Access-Control-Allow-Headers'] = 'accept, origin, content-type'
+    return response
+
+
+@app.route('/goals', methods=['POST', 'OPTIONS'])
 def goals():
+    if request.method == 'OPTIONS':
+        return options()
+
     scored_by, assisted_by = extract_player_numbers_from(request.data)
     if not scored_by or not VALID_PLAYER_NUMBER.match(scored_by):
         abort(400)
@@ -14,7 +26,10 @@ def goals():
     if assisted_by and not VALID_PLAYER_NUMBER.match(assisted_by):
         abort(400)
 
-    return make_response(jsonify({'success': True}), 201)
+    response = make_response(jsonify({'success': True}), 201)
+    if 'Origin' in request.headers:
+        response.headers['Access-Control-Allow-Origin'] = request.headers['Origin']
+    return response
 
 
 def extract_player_numbers_from(data):
