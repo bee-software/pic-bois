@@ -25,7 +25,7 @@ def setup():
 def install_requirements():
     with prefix(_activate_virtual_env()):
         local('pip install -r requirements.txt --use-mirrors')
-        local('pip install -r test-requires.txt --use-mirrors')
+        local('pip install -r requirements-test.txt --use-mirrors')
 
 
 @task
