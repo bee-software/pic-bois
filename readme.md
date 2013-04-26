@@ -16,5 +16,6 @@
 - fab karma:start : once to start karma
 - fab karma:run : to run the tests
 
-# to run the server
-- fab start
+# to run
+- fab run_server
+- fab run_client
