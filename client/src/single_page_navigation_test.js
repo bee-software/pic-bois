@@ -1,6 +1,7 @@
-/*global describe, beforeEach, spyOn, it, expect */
+/*global describe, beforeEach, setFixtures, spyOn, it, expect, singlePage */
 
 describe("Single page navigation", function(){
+    "use strict";
 
     beforeEach(function(){
         setFixtures('<div id="main"/><div id="links"/>');

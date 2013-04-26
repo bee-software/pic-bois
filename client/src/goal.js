@@ -39,11 +39,11 @@ var goal = {};
     };
 
     function _displaySuccess() {
-        $('#message').html("Goal marked")
+        $('#message').html("Goal marked");
     }
 
     function _displayErrorMessage() {
-        $('#message').html("Goal not marked")
+        $('#message').html("Goal not marked");
     }
 
 }());

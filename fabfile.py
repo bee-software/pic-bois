@@ -7,8 +7,9 @@ VIRTUALENV = '.py27'
 
 @task(default=True)
 def default():
-    lint()
+    lint_py()
     test_py()
+    lint_js()
     test_js()
 
 @task
@@ -24,22 +25,26 @@ def install_requirements():
         local('pip install -r test-requires.txt --use-mirrors')
 
 @task
+def clean():
+    local('./build/clean.sh')
+
+@task
 def deploy():
     local('git push heroku python:master')
 
 @task
-def lint():
+def lint_py():
     with prefix(_activate_virtual_env()):
         local('pylint --rcfile=./build/pylintrc --reports=n features picbois')
-
-@task
-def clean():
-    local('./build/clean.sh')
 
 @task
 def test_py():
     with prefix(_activate_virtual_env()):
         local('nosetests')
+
+@task
+def lint_js():
+    local('./node_modules/.bin/jshint --verbose --config build/jshintrc client/src')
 
 @task
 def test_js():

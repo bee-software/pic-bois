@@ -4,7 +4,8 @@
 
     "devDependencies": {
         "phantomjs": ">= 1.9.0",
-        "karma": "0.8.x"
+        "karma": "0.8.x",
+        "jshint": "1.1.x"
     },
     "engine": "node >= 0.10.3"
 }

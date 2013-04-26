@@ -1,10 +1,11 @@
-/*global describe, it, spyOn, expect */
+/*global describe, beforeEach, jasmine, loadFixtures, it, spyOn, expect, goal */
 
 describe("Mark goal page", function () {
+    "use strict";
 
     beforeEach(function () {
         this.addMatchers({
-            toEqualCall: toEqualCall
+            toEqualCall: jasmine.toEqualCall
         });
         jasmine.getFixtures().fixturesPath = '/base/client';
     });
@@ -20,7 +21,7 @@ describe("Mark goal page", function () {
 
         var recentCall = $.ajax.mostRecentCall.args[0];
         expect(recentCall).toEqualCall({url: "http://localhost:8000/goals", type: "POST", data: {assistedBy: "11", scoredBy: "23"},
-                                           contentType: "application/json" })
+                                           contentType: "application/json" });
     });
 
     it("displays success on 201", function () {
@@ -32,7 +33,7 @@ describe("Mark goal page", function () {
 
         goal.mark();
 
-        expect($('#message').html()).toEqual("Goal marked")
+        expect($('#message').html()).toEqual("Goal marked");
     });
 
     it("displays error on 400", function () {
@@ -44,11 +45,11 @@ describe("Mark goal page", function () {
 
         goal.mark();
 
-        expect($('#message').html()).toEqual("Goal not marked")
+        expect($('#message').html()).toEqual("Goal not marked");
     });
 
 
-    function toEqualCall(expected) {
+    jasmine.toEqualCall = function(expected) {
         var actual = this.actual;
 
         this.message = function () {
@@ -63,7 +64,7 @@ describe("Mark goal page", function () {
             javascriptObjectsEqual(JSON.parse(actual.data), expected.data) &&
             actual.contentType === expected.contentType;
 
-    }
+    };
 
     function javascriptObjectsEqual(a, b) {
 

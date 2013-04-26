@@ -37,7 +37,7 @@ var singlePage = {};
     }
 
     function _loadPageInMainArea(page) {
-        $.get(page, function (content) { _fillMainAreaWith(content) });
+        $.get(page, function (content) { _fillMainAreaWith(content); });
     }
 
     function _fillMainAreaWith(content) {
