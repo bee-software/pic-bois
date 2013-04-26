@@ -26,6 +26,9 @@ def goals():
     if assisted_by and not VALID_PLAYER_NUMBER.match(assisted_by):
         abort(400)
 
+    if scored_by == assisted_by:
+        abort(400)
+
     response = make_response(jsonify({'success': True}), 201)
     if 'Origin' in request.headers:
         response.headers['Access-Control-Allow-Origin'] = request.headers['Origin']
