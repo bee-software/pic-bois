@@ -3,12 +3,14 @@ import unittest
 from features import phantomjs, get_current_file_dir
 from hamcrest import assert_that, equal_to
 from drivers.server_driver import ServerDriver
+from nose.tools import nottest
 from splinter import Browser
 
 API_SERVER_PORT = 8000
 API_SERVER_CMD = ['gunicorn', 'picbois:APP', '-w', '1', '-b', '0.0.0.0:{port}'.format(port=API_SERVER_PORT)]
 CLIENT_SERVER_PORT = 5000
 CLIENT_SERVER_CMD = ['python', '-m', 'SimpleHTTPServer', str(CLIENT_SERVER_PORT)]
+
 
 class MarkGoal(unittest.TestCase):
     def test_it_offers_a_way_to_mark_a_goal(self):
@@ -18,6 +20,18 @@ class MarkGoal(unittest.TestCase):
         self.browser.find_by_id('markGoal').click()
 
         assert_that(self.browser.find_by_id("message").text, equal_to("Goal marked"))
+
+    @nottest
+    def test_it_shows_the_marked_goals(self):
+        self.browser.visit("http://localhost:{port}/#new_goal".format(port=CLIENT_SERVER_PORT))
+        self.browser.fill("scoredBy", "23")
+        self.browser.fill("assistedBy", "10")
+        self.browser.find_by_id('markGoal').click()
+
+        # self.browser.reload()
+
+        marked_goals = self.browser.find_by_css('#markedGoals > li')
+        assert_that(marked_goals.first.text, equal_to("Scored by: 23, Assisted by: 11"))
 
 
     @classmethod
@@ -35,6 +49,7 @@ class MarkGoal(unittest.TestCase):
         cls.client_app_server.shutdown()
         cls.server.shutdown()
         cls.browser.quit()
+
 
 def client_path():
     return get_current_file_dir(inspect.currentframe()) + '/../client'
