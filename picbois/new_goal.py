@@ -2,6 +2,7 @@ import json
 import re
 from flask import request, abort, make_response, jsonify
 from picbois import APP as app
+from games import GOALS as games_goals
 
 VALID_PLAYER_NUMBER = re.compile(r"\d{1,2}$")
 
@@ -28,6 +29,8 @@ def goals():
 
     if scored_by == assisted_by:
         abort(400)
+
+    games_goals.append({'scoredBy': scored_by, 'assistedBy': assisted_by})
 
     response = make_response(jsonify({'success': True}), 201)
     if 'Origin' in request.headers:
