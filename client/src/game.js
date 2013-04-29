@@ -3,6 +3,10 @@ var game = {};
 (function () {
     "use strict";
 
+    game.init = function (gamePage) {
+        this.gamePage = gamePage;
+    };
+
     game.goals = function () {
         $.ajax({
             type: "GET",
@@ -14,21 +18,29 @@ var game = {};
     };
 
     function _showGoals(data) {
-        var markedGoals = $('#markedGoals');
+        var goals = data.goals;
 
-        if (data.goals.length === 0) {
-            markedGoals.append("<li>No goals</li>");
+        if (goals.length === 0) {
+            showNoGoals();
         }
         else {
-            for (var i = 0; i < data.goals.length; i++) {
-                var goal = data.goals[i];
-                markedGoals.append("<li>" + goal.scoredBy + " " + goal.assistedBy + "</li>");
+            for (var i = 0; i < goals.length; i++) {
+                var goal = goals[i];
+                showGoal(goal);
             }
         }
     }
 
-    function _displayErrorMessage() {
+    function showNoGoals() {
+        $('#markedGoals').append("<li>No goals</li>");
+    }
 
+    function showGoal(goal) {
+        $('#markedGoals').append("<li>" + goal.scoredBy + " " + goal.assistedBy + "</li>");
+    }
+
+    function _displayErrorMessage(){
+        $('#markedGoals').append("<li>Error</li>");
     }
 
 }());
