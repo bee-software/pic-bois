@@ -12,8 +12,8 @@ var goal = {};
             type: "POST",
             url: "http://localhost:8000/goals",
             data: _withGoalInformation(),
-            success: function(){ _displaySuccess(); },
-            error: function(){ _displayErrorMessage(); },
+            success: _displaySuccess,
+            error: _displayErrorMessage,
             contentType: "application/json"
         });
     };

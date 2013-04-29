@@ -26,7 +26,7 @@ describe("Marked goals", function () {
 
         game.goals();
         var recentCall = $.ajax.mostRecentCall.args[0];
-        expect(recentCall.dataType).toEqual("JSON");
+        expect(recentCall.dataType).toEqual("json");
     });
 
     it("shows a marked goal", function () {
