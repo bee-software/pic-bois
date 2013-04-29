@@ -7,40 +7,24 @@ var game = {};
         this.gamePage = gamePage;
     };
 
-    game.goals = function () {
+    game.getGoals = function () {
         $.ajax({
             type: "GET",
             url: "http://localhost:8000/games/1/goals/",
-            success: _showGoals,
-            error: _displayErrorMessage,
+            success: game.success.bind(this),
+            error: game.error.bind(this),
             dataType: "json"
         });
     };
 
-    function _showGoals(data) {
+    game.success = function (data) {
         var goals = data.goals;
+        this.gamePage.showGoals(goals);
+    };
 
-        if (goals.length === 0) {
-            showNoGoals();
-        }
-        else {
-            for (var i = 0; i < goals.length; i++) {
-                var goal = goals[i];
-                showGoal(goal);
-            }
-        }
-    }
+    game.error = function () {
+        this.gamePage.displayErrorMessage();
+    };
 
-    function showNoGoals() {
-        $('#markedGoals').append("<li>No goals</li>");
-    }
-
-    function showGoal(goal) {
-        $('#markedGoals').append("<li>" + goal.scoredBy + " " + goal.assistedBy + "</li>");
-    }
-
-    function _displayErrorMessage(){
-        $('#markedGoals').append("<li>Error</li>");
-    }
 
 }());

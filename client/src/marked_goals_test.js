@@ -1,7 +1,11 @@
-/*global describe, loadFixtures, spyOn, it, expect, game */
+/*global describe, beforeEach, loadFixtures, spyOn, it, expect, game, gamePage */
 
 describe("Marked goals", function () {
     "use strict";
+
+    beforeEach(function () {
+        game.init(gamePage);
+    });
 
     it("contains a placeholder for marked goals", function () {
         loadFixtures('new_goal.html');
@@ -12,7 +16,7 @@ describe("Marked goals", function () {
         loadFixtures('new_goal.html');
         spyOn($, "ajax");
 
-        game.goals();
+        game.getGoals();
 
         var recentCall = $.ajax.mostRecentCall.args[0];
         expect(recentCall.url).toEqual("http://localhost:8000/games/1/goals/");
@@ -20,11 +24,11 @@ describe("Marked goals", function () {
 
     });
 
-    it("gets the goals in json", function(){
+    it("gets the goals in json", function () {
         loadFixtures('new_goal.html');
         spyOn($, "ajax");
 
-        game.goals();
+        game.getGoals();
         var recentCall = $.ajax.mostRecentCall.args[0];
         expect(recentCall.dataType).toEqual("json");
     });
@@ -33,22 +37,24 @@ describe("Marked goals", function () {
         loadFixtures('new_goal.html');
 
         spyOn($, "ajax").andCallFake(function (params) {
-            params.success({goals:[{scoredBy:"11", assistedBy:"23"}]});
+            params.success({goals: [
+                {scoredBy: "11", assistedBy: "23"}
+            ]});
         });
 
-        game.goals();
+        game.getGoals();
 
         expect($('#markedGoals').find('li').html()).toEqual("11 23");
     });
 
-    it("shows no goals if theres no marked goals", function(){
+    it("shows no goals if theres no marked goals", function () {
         loadFixtures('new_goal.html');
 
         spyOn($, "ajax").andCallFake(function (params) {
-            params.success({goals:[]});
+            params.success({goals: []});
         });
 
-        game.goals();
+        game.getGoals();
 
         expect($('#markedGoals').find('li').html()).toEqual("No goals");
     });
@@ -56,18 +62,24 @@ describe("Marked goals", function () {
     it("shows all received marked goal", function () {
         loadFixtures('new_goal.html');
 
-        var goals = [{scoredBy:"11", assistedBy:"22"}, {scoredBy:"1",assistedBy:"00"}, {scoredBy:"5",assistedBy:""}];
+        var goals = [
+            {scoredBy: "11", assistedBy: "22"},
+            {scoredBy: "1", assistedBy: "00"},
+            {scoredBy: "5", assistedBy: ""}
+        ];
 
         spyOn($, "ajax").andCallFake(function (params) {
-            params.success({goals:[{scoredBy:goals[0].scoredBy, assistedBy:goals[0].assistedBy},
-                                   {scoredBy:goals[1].scoredBy, assistedBy:goals[1].assistedBy},
-                                   {scoredBy:goals[2].scoredBy, assistedBy:goals[2].assistedBy}]});
+            params.success({goals: [
+                {scoredBy: goals[0].scoredBy, assistedBy: goals[0].assistedBy},
+                {scoredBy: goals[1].scoredBy, assistedBy: goals[1].assistedBy},
+                {scoredBy: goals[2].scoredBy, assistedBy: goals[2].assistedBy}
+            ]});
         });
 
-        game.goals();
+        game.getGoals();
 
         var goalsElement = $('#markedGoals').find('li');
-        goalsElement.each(function(idx, li){
+        goalsElement.each(function (idx, li) {
             var goal = $(li);
             expect(goal.html()).toEqual(goals[idx].scoredBy + " " + goals[idx].assistedBy);
         });
