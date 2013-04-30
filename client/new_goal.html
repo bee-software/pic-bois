@@ -11,8 +11,10 @@
         goal.addClickEventCallback();
     });
 </script>
+<script src="src/game_page.js" type="text/javascript"></script>
 <script type="text/javascript">
     $.getScript("src/game.js", function () {
+        game.init(gamePage);
         game.getGoals();
     });
 </script>
