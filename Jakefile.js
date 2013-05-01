@@ -2,49 +2,31 @@
 (function () {
     "use strict";
 
-    task("default", ["lint", "test"]);
+    task("default", function() {
+        jake.Task.lint.invoke();
+        jake.Task.test.invoke();
+    });
 
     desc("Static code analysis");
     task("lint", function () {
         var lint = require("./build/lint_runner.js");
-        var passed = lint.validateFileList(filesToLint(), lintOptions(), {});
-        if (!passed) {
-            fail("Lint failed");
-        }
+        lint.validateFileList(filesToLint(), lintOptions(), {}, complete, fail);
     });
 
-    desc("Integration server task");
-    task("integration", ["lint", "feature", "test"]);
-
-    desc("Unit tests");
-    task("test", ["jasmine"]);
-
-    desc("Test jasmine");
-    task("jasmine", function () {
+    desc("Tests");
+    task("test", function () {
         var jasminenode = require("./build/jasminenode_runner.js");
-        jasminenode.runTests("./src/server", complete, fail);
-    }, {async: true});
-
-    desc("Test features");
-    task("feature", function () {
-        var jasminenode = require("./build/jasminenode_runner.js");
-        jasminenode.runTests("./features", complete, fail);
+        jasminenode.runTests(".", complete, fail);
     }, {async: true});
 
     desc("Start application localy");
     task("start", function () {
-        var spawn = require("child_process").spawn;
-        var node = spawn("./node_modules/.bin/forever", ["start", "src/server/application.js"]);
-        node.stdout.on("data", logToConsole);
-        node.stderr.on("data", logToConsole);
+        run("./node_modules/.bin/forever", ["start", "src/server/application.js"]);
     });
 
     desc("Stop application localy");
     task("stop", function () {
-        var spawn = require("child_process").spawn;
-        var node = spawn("./node_modules/.bin/forever", ["stop", "src/server/application.js"]);
-        node.stdout.on("data", logToConsole);
-        node.stderr.on("data", logToConsole);
+        run("./node_modules/.bin/forever", ["stop", "src/server/application.js"]);
     });
 
     desc("Deploy application");
@@ -61,6 +43,7 @@
         files.exclude("node_module");
         return files.toArray();
     }
+
 
     function lintOptions() {
         return {
@@ -80,8 +63,8 @@
             plusplus: false,
             quotmark: "double",
             undef: true,
-            unused: false, // not sure about this one, ask Eric
-            strict: false, // not sure about this one, ask Eric
+            unused: false,
+            strict: false,
             trailing: true,
             maxdepth: 2,
             node: true
@@ -89,8 +72,15 @@
         };
     }
 
-    function logToConsole(data) {
-        console.log(data);
+
+    function run(command, params) {
+        var spawn = require("child_process").spawn;
+        var node = spawn(command, params);
+        node.stdout.on("data", logToConsole);
+        node.stderr.on("data", logToConsole);
     }
 
+    function logToConsole(data) {
+        console.log(String(data));
+    }
 }());

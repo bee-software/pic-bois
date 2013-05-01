@@ -20,6 +20,6 @@
         "npm": "1.1.x"
     },
     "scripts": {
-        "test": "./jake integration"
+        "test": "./jake"
     }
 }

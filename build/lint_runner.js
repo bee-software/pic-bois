@@ -23,12 +23,18 @@
         return exports.validateSource(sourceCode, options, globals, filename);
     };
 
-    exports.validateFileList = function (fileList, options, globals) {
+    exports.validateFileList = function (fileList, options, globals, success, fail) {
         var pass = true;
         fileList.forEach(function (filename) {
             pass = exports.validateFile(filename, options, globals) && pass;
         });
-        return pass;
+
+        done(pass, success, fail)
     };
+
+    function done(pass, success, fail){
+        if (pass === true) success();
+        else fail("Lint failed")
+    }
 
 }());
