@@ -19,12 +19,6 @@
     desc("Unit tests");
     task("test", ["jasmine"]);
 
-    desc("Test nodeunit");
-    task("nodeunit", function () {
-        var nodeunit = require("./build/nodeunit_runner.js");
-        nodeunit.runTests(nodeunitTestFiles(), complete, fail);
-    }, {async: true});
-
     desc("Test jasmine");
     task("jasmine", function () {
         var jasminenode = require("./build/jasminenode_runner.js");
@@ -68,13 +62,6 @@
         return files.toArray();
     }
 
-    function nodeunitTestFiles() {
-        var testFiles = new jake.FileList();
-        testFiles.include("spec/*_test.js");
-        testFiles.include("features/*_test.js");
-        return testFiles.toArray();
-    }
-
     function lintOptions() {
         return {
             // from ./node_modules/jshint/examples/.jshintrc
@@ -103,7 +90,7 @@
     }
 
     function logToConsole(data) {
-        console.log(String(data));
+        console.log(data);
     }
 
 }());
