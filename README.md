@@ -8,14 +8,8 @@
 #setup
 - npm install
 
-#to run the feature tests
-- ./jake feature
-
-#to run the unit tests
-- ./jake test
-
-#to run lint static analysis
-- ./jake lint
+#to run lint & tests
+- ./jake
 
 #to run the app locally
 - ./jake start + open http://localhost:5000
